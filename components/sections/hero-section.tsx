@@ -24,19 +24,23 @@ export default function HeroSection() {
   }, [])
 
   const scrollToAbout = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
+    document.getElementById("about-content")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section id="hero" className="min-h-screen bg-white flex items-center justify-center py-20 px-4">
+    // Make this the About anchor as requested
+    <section
+      id="about"
+      className="min-h-screen bg-white flex items-center justify-center py-20 px-4 scroll-mt-36"
+    >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-6 items-center">
           {/* Left side - Profile Image */}
           <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
             <div className="relative">
               <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/professional-headshot-of-abel-getahun--software-en.jpg"
+                  src="/profile/profile-1.png"
                   alt="Abel Getahun"
                   width={400}
                   height={400}
@@ -44,7 +48,6 @@ export default function HeroSection() {
                   priority
                 />
               </div>
-              {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-black rounded-2xl opacity-10 rotate-12"></div>
               <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gray-300 rounded-xl opacity-20 -rotate-12"></div>
             </div>
@@ -52,15 +55,16 @@ export default function HeroSection() {
 
           {/* Right side - Content */}
           <div className="order-2 lg:order-2 text-center lg:text-left">
-            {/* Logo/Icon */}
-            <div className="mb-8 flex justify-center lg:justify-start">
-              <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                <div className="w-6 h-6 bg-white rounded-sm transform rotate-45"></div>
-              </div>
-            </div>
+            {/* Removed decorative icon above the name as requested */}
 
             {/* Name and Title */}
-            <div className="mb-6">
+            <div className="mb-4 lg:mb-6">
+              {/* ABOUT label moved here above the name */}
+              <div className="mt-6 mb-6 flex items-center justify-center lg:justify-start w-full">
+                <span className="text-sm font-mono text-gray-500 mr-4">01</span>
+                <div className="h-px bg-gray-200 flex-1"></div>
+                <span className="text-sm font-mono text-gray-500 ml-4">ABOUT</span>
+              </div>
               <h1 className="font-heading text-4xl lg:text-5xl xl:text-6xl font-bold text-black mb-2 tracking-tight">
                 Abel Getahun
               </h1>
