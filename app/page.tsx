@@ -15,16 +15,45 @@ export default function Home() {
       <ScrollIndicator />
       <Navigation />
 
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gray-50 rounded-full opacity-30 animate-geometric-float" />
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gray-100 rounded-full opacity-20 animate-float" />
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Small black dots with floating animation */}
+        <div className="absolute top-20 left-10 w-2 h-2 bg-black rounded-full opacity-10 animate-float" />
+        <div className="absolute top-32 right-20 w-1 h-1 bg-black rounded-full opacity-15 animate-geometric-float" />
         <div
-          className="absolute bottom-40 left-20 w-40 h-40 bg-gray-50 rounded-full opacity-25 animate-geometric-float"
+          className="absolute top-60 left-1/4 w-1.5 h-1.5 bg-black rounded-full opacity-8 animate-float"
+          style={{ animationDelay: "1s" }}
+        />
+
+        {/* Small black squares with rotation */}
+        <div
+          className="absolute top-40 right-1/3 w-3 h-3 bg-black opacity-5 animate-spin-slow"
           style={{ animationDelay: "2s" }}
         />
+        <div className="absolute bottom-40 left-20 w-2 h-2 bg-black opacity-8 animate-pulse-slow" />
+
+        {/* Small black triangles */}
+        <div className="absolute top-80 right-10 w-0 h-0 border-l-2 border-r-2 border-b-3 border-transparent border-b-black opacity-10 animate-bounce-slow" />
         <div
-          className="absolute bottom-20 right-10 w-28 h-28 bg-gray-100 rounded-full opacity-30 animate-float"
-          style={{ animationDelay: "1s" }}
+          className="absolute bottom-60 left-1/3 w-0 h-0 border-l-1.5 border-r-1.5 border-b-2 border-transparent border-b-black opacity-12 animate-float"
+          style={{ animationDelay: "3s" }}
+        />
+
+        {/* More scattered small elements */}
+        <div
+          className="absolute top-96 left-2/3 w-1 h-1 bg-black rounded-full opacity-10 animate-geometric-float"
+          style={{ animationDelay: "1.5s" }}
+        />
+        <div
+          className="absolute bottom-32 right-1/4 w-2 h-2 bg-black rounded-full opacity-6 animate-float"
+          style={{ animationDelay: "2.5s" }}
+        />
+        <div
+          className="absolute top-1/2 left-16 w-1.5 h-1.5 bg-black opacity-8 animate-spin-slow"
+          style={{ animationDelay: "4s" }}
+        />
+        <div
+          className="absolute bottom-20 right-16 w-1 h-1 bg-black rounded-full opacity-12 animate-pulse-slow"
+          style={{ animationDelay: "0.5s" }}
         />
       </div>
 
