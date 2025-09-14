@@ -1,20 +1,27 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import SectionTitle from "@/components/ui/section-title"
 
 const tools = [
-  { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
   { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
-  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
   { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
   { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
   { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
   { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+  { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+  { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+  { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
   { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
   { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+  { name: "Android Studio", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" },
+  { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+  { name: "Apache Maven", icon: "https://cdn.simpleicons.org/apachemaven/C71A36" },
 ]
 
 export default function AboutSection() {
@@ -39,88 +46,144 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <section id="about-content" ref={sectionRef} className="py-24 bg-white">
+  <section id="about-content" ref={sectionRef} className="pt-16 pb-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header (simplified, number moved to hero) */}
-        <div className="mb-20">
-          <h2
-            className={`font-heading text-3xl md:text-4xl font-bold text-black transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            About Me
-          </h2>
-        </div>
-
-        <div className="max-w-4xl mx-auto mb-16">
-          <div
-            className={`transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
-            <div className="mb-8 text-center">
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-black mb-4">Abel Getahun</h1>
-              <p className="text-xl text-black font-medium mb-6">Software Engineering Student | AI/ML Enthusiast</p>
-            </div>
-
-            <div className="prose prose-lg text-gray-700 leading-relaxed max-w-none text-center">
-              <p className="mb-6 text-base">
-                I'm a passionate <span className="font-semibold text-black">Software Engineering student</span> at Adama
-                Science & Technology University, currently in my 4th year. My journey in technology is driven by an
-                insatiable curiosity to solve complex problems and create innovative solutions.
-              </p>
-              <p className="mb-6 text-base">
-                With expertise spanning{" "}
-                <span className="font-semibold text-black">AI/ML, mobile development, and web technologies</span>, I've
-                successfully completed multiple internships and built projects that make a real impact.
-              </p>
-              <p className="mb-8 text-base">
-                As a <span className="font-semibold text-black">competitive programmer</span> with 500+ problems solved,
-                I bring strong analytical thinking and problem-solving skills to every project.
-              </p>
-
-              {/* Quote */}
-              <div className="border-l-4 border-black pl-6 py-4 bg-gray-50 rounded-r-lg">
-                <p className="text-lg font-medium text-gray-900 italic">
-                  "Turning complex challenges into elegant solutions"
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div
-          className={`transition-all duration-1000 delay-700 ${
+          className={`transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h3 className="text-2xl font-bold text-black mb-8 text-center">Tools & Technologies</h3>
-          <div className="relative overflow-hidden">
-            <div className="flex animate-marquee space-x-8">
-              {/* First set of tools */}
-              {tools.map((tool, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-3 bg-white rounded-lg shadow-sm border border-gray-100 px-4 py-3 whitespace-nowrap"
-                >
-                  <img src={tool.icon || "/placeholder.svg"} alt={tool.name} className="w-6 h-6" />
-                  <span className="text-sm font-medium text-gray-800">{tool.name}</span>
+          <SectionTitle className="mb-4">Highlights</SectionTitle>
+
+          {/* Horizontal scroller */}
+          <div className="-mx-4 sm:-mx-6 lg:-mx-8">
+            <div className="relative px-4 sm:px-6 lg:px-8 overflow-x-auto">
+              {/* Edge fade */}
+              <div className="pointer-events-none absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent" />
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent" />
+
+              <div className="flex gap-4 snap-x snap-mandatory py-2">
+                {/* Card 1 */}
+                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
+                  <h3 className="text-lg font-semibold text-black mb-2">Software Engineer</h3>
+                  <p className="text-sm text-gray-600">
+                    Building reliable, maintainable systems with a focus on clean architecture and developer
+                    experience.
+                  </p>
                 </div>
-              ))}
-              {/* Duplicate set for seamless loop */}
-              {tools.map((tool, index) => (
-                <div
-                  key={`duplicate-${index}`}
-                  className="flex items-center space-x-3 bg-white rounded-lg shadow-sm border border-gray-100 px-4 py-3 whitespace-nowrap"
-                >
-                  <img src={tool.icon || "/placeholder.svg"} alt={tool.name} className="w-6 h-6" />
-                  <span className="text-sm font-medium text-gray-800">{tool.name}</span>
+
+                {/* Card 2 */}
+                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
+                  <h3 className="text-lg font-semibold text-black mb-2">AI & ML Enthusiast</h3>
+                  <p className="text-sm text-gray-600">
+                    Exploring applied ML for real products — from data to deployment, responsibly.
+                  </p>
                 </div>
-              ))}
+
+                {/* Card 3 */}
+                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
+                  <h3 className="text-lg font-semibold text-black mb-2">Mobile & Web Development</h3>
+                  <p className="text-sm text-gray-600">
+                    Crafting fast, accessible apps with modern stacks across web and mobile surfaces.
+                  </p>
+                </div>
+
+                {/* Card 4 */}
+                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
+                  <h3 className="text-lg font-semibold text-black mb-2">Competitive Programming</h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href="https://leetcode.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-black hover:underline"
+                    >
+                      <img src="https://cdn.simpleicons.org/leetcode/FFA116" alt="LeetCode" className="w-4 h-4" />
+                      LeetCode
+                    </a>
+                    <a
+                      href="https://codeforces.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-black hover:underline"
+                    >
+                      <img src="https://cdn.simpleicons.org/codeforces/1F8ACB" alt="Codeforces" className="w-4 h-4" />
+                      Codeforces
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Tech Stack ticker below to keep rhythm with design */}
+          <MarqueeTechStack />
         </div>
       </div>
     </section>
+  )
+}
+
+function MarqueeTechStack() {
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const firstRef = useRef<HTMLDivElement | null>(null)
+  const [distance, setDistance] = useState<number>(0)
+
+  useEffect(() => {
+    const calc = () => {
+      if (!firstRef.current) return
+      const w = firstRef.current.getBoundingClientRect().width
+      setDistance(w)
+    }
+    calc()
+    const ro = new ResizeObserver(calc)
+    if (firstRef.current) ro.observe(firstRef.current)
+    window.addEventListener('resize', calc)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', calc)
+    }
+  }, [])
+
+  const style: React.CSSProperties = {
+    ['--marquee-distance' as any]: distance ? `${distance}px` : '0px',
+    ['--marquee-duration' as any]: '32s',
+  }
+
+  return (
+    <div className="mt-14">
+      <SectionTitle className="mb-4">Tech Stack</SectionTitle>
+      <div ref={wrapperRef} className="relative overflow-hidden h-16">
+        <div className="marquee-dual relative flex" style={style}>
+          <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">
+            {tools.map((tool, i) => (
+              <MarqueeItem key={i} tool={tool} />
+            ))}
+          </div>
+          {/* duplicate copy */}
+          <div className="flex shrink-0" aria-hidden="true">
+            {tools.map((tool, i) => (
+              <MarqueeItem key={`dup-${i}`} tool={tool} hiddenLabel />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MarqueeItem({ tool, hiddenLabel }: { tool: { name: string; icon?: string }; hiddenLabel?: boolean }) {
+  return (
+    <div className="flex items-center gap-3 px-4 py-3 whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity">
+      <img src={tool.icon || '/placeholder.svg'} alt={hiddenLabel ? '' : tool.name} className="w-6 h-6" />
+      <span className="text-sm font-medium text-gray-800">{tool.name}</span>
+    </div>
   )
 }
