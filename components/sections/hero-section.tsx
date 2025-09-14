@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Send, MapPin } from "lucide-react"
 import Image from "next/image"
 
@@ -31,7 +30,7 @@ export default function HeroSection() {
     // Make this the About anchor as requested
     <section
       id="about"
-      className="min-h-screen bg-white flex items-center justify-center py-20 px-4 scroll-mt-36"
+  className="min-h-screen bg-white flex items-center justify-center pt-20 pb-8 px-4 scroll-mt-36"
     >
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-2 lg:gap-6 items-center">
@@ -92,7 +91,7 @@ export default function HeroSection() {
             </div>
 
             {/* Social Links */}
-            <div className="flex justify-center lg:justify-start space-x-4 mb-8">
+            <div className="flex justify-center lg:justify-start space-x-4 mb-4">
               <a
                 href="https://github.com/abelgetahun"
                 target="_blank"
@@ -129,16 +128,7 @@ export default function HeroSection() {
               </a>
             </div>
 
-            {/* CTA Button */}
-            <div>
-              <Button
-                onClick={scrollToAbout}
-                size="lg"
-                className="bg-black text-white hover:bg-gray-800 font-medium px-8 py-3 text-base rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                View My Work
-              </Button>
-            </div>
+            {/* CTA removed per request */}
           </div>
         </div>
       </div>
