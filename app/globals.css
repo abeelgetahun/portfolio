@@ -293,7 +293,41 @@
   }
 
   .animate-marquee {
-    animation: marquee 20s linear infinite;
+    animation: marquee 40s linear infinite;
+  }
+
+  /* Seamless variable-distance marquee (uses --marquee-distance) */
+  @keyframes marquee-variable {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(var(--marquee-distance) * -1));
+    }
+  }
+
+  .marquee-outer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    animation: marquee-variable var(--marquee-duration,40s) linear infinite;
+  }
+
+  .marquee-track.second {
+    animation-delay: calc(var(--marquee-duration,40s) / 2 * -1);
+  }
+
+  /* Dual inline marquee (two copies inside) */
+  .marquee-dual {
+    width: max-content;
+    animation: marquee-variable var(--marquee-duration,32s) linear infinite;
   }
 
   .scroll-indicator {
