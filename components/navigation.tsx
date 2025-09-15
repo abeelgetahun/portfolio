@@ -8,7 +8,7 @@ const navItems = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Careers", href: "#experience" },
-  { name: "Articles", href: "#", disabled: true }, // Non-functional placeholder
+  // { name: "Articles", href: "#", disabled: true }, // Commented out by request
   { name: "Education", href: "#education" },
 ]
 
@@ -18,7 +18,7 @@ export default function Navigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navItems.filter((item) => !item.disabled).map((item) => item.href.substring(1))
+  const sections = navItems.filter((item) => !item.disabled).map((item) => item.href.substring(1))
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -38,7 +38,7 @@ export default function Navigation() {
   }, [])
 
   const scrollToSection = (href: string, disabled?: boolean) => {
-    if (disabled) return // Prevent clicking on articles tab
+    if (disabled) return
 
     const element = document.getElementById(href.substring(1))
     if (element) {

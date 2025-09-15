@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react"
 const footerLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
-  { name: "Articles", href: "#articles" },
   { name: "Careers", href: "#experience" },
 ]
 

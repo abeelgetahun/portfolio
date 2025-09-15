@@ -2,7 +2,6 @@ import HeroSection from "@/components/sections/hero-section"
 import AboutSection from "@/components/sections/about-section"
 import ProjectsSection from "@/components/sections/projects-section"
 import ExperienceSection from "@/components/sections/experience-section"
-import ArticlesSection from "@/components/sections/articles-section"
 import EducationSection from "@/components/sections/education-section"
 import ContactSection from "@/components/sections/contact-section"
 import Navigation from "@/components/navigation"
@@ -66,9 +65,6 @@ export default function Home() {
       </div>
       <div className="section-divider">
         <ExperienceSection />
-      </div>
-      <div className="section-divider">
-        <ArticlesSection />
       </div>
       <div className="section-divider">
         <EducationSection />
