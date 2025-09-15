@@ -92,7 +92,7 @@ export default function ContactSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            Ready to collaborate on your next project? {"Let's"} discuss how we can create something extraordinary.
+            
           </p>
         </div>
 

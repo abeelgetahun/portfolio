@@ -3,7 +3,6 @@ import AboutSection from "@/components/sections/about-section"
 import ProjectsSection from "@/components/sections/projects-section"
 import ExperienceSection from "@/components/sections/experience-section"
 import EducationSection from "@/components/sections/education-section"
-import ContactSection from "@/components/sections/contact-section"
 import Navigation from "@/components/navigation"
 import ScrollIndicator from "@/components/scroll-indicator"
 import Footer from "@/components/footer"
@@ -68,9 +67,6 @@ export default function Home() {
       </div>
       <div className="section-divider">
         <EducationSection />
-      </div>
-      <div className="section-divider">
-        <ContactSection />
       </div>
       <Footer />
     </main>

@@ -60,7 +60,7 @@ export default function ExperienceSection() {
         {/* Section Header strip only */}
         <div className="mb-12">
           <div className="flex items-center mb-6">
-            <span className="text-sm font-mono text-gray-500 mr-4">02</span>
+            <span className="text-sm font-mono text-gray-500 mr-4">03</span>
             <div className="h-px bg-gray-200 flex-1"></div>
             <span className="text-sm font-mono text-gray-500 mx-4">CAREERS</span>
           </div>

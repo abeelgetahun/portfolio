@@ -1,6 +1,7 @@
 "use client"
 
-import { ArrowUpRight } from "lucide-react"
+import * as Popover from "@radix-ui/react-popover"
+import { ArrowUpRight, Mail, Send, Linkedin } from "lucide-react"
 
 const footerLinks = [
   { name: "About", href: "#about" },
@@ -34,11 +35,48 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* Copyright */}
+          {/* Copyright + Contact */}
           <div className="flex items-center text-sm text-gray-500">
             <span>© 2025 Abel Getahun</span>
             <ArrowUpRight className="w-4 h-4 ml-2" />
             <span className="ml-2">All rights reserved.</span>
+
+            <Popover.Root>
+              <Popover.Trigger asChild>
+                <button
+                  aria-label="Contact me"
+                  className="ml-4 px-3 py-2 rounded-full bg-black text-white text-sm font-medium shadow hover:bg-black/90 focus:outline-none focus:ring-2 focus:ring-black/30 whitespace-nowrap"
+                >
+                  Contact me
+                </button>
+              </Popover.Trigger>
+              <Popover.Content sideOffset={10} align="end" className="z-[10000] rounded-2xl border border-gray-200 bg-white shadow-xl p-2 w-56">
+                <div className="flex flex-col">
+                  <a
+                    href="mailto:youremail@example.com"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
+                  >
+                    <Mail className="w-4 h-4" /> Gmail
+                  </a>
+                  <a
+                    href="https://t.me/yourusername"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
+                  >
+                    <Send className="w-4 h-4" /> Telegram
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/yourprofile"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
+                  >
+                    <Linkedin className="w-4 h-4" /> LinkedIn
+                  </a>
+                </div>
+              </Popover.Content>
+            </Popover.Root>
           </div>
         </div>
       </div>
