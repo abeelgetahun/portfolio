@@ -1,119 +1,112 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
-import { GraduationCap, Award } from "lucide-react"
 
-const educationData = [
+type Certificate = {
+  title: string
+  issuer?: string
+  images: string[]
+}
+
+const certificates: Certificate[] = [
   {
-    type: "education",
-    institution: "Addis Ababa University",
-    degree: "Bachelor of Science in Software Engineering",
-    period: "2019 - 2023",
-    description:
-      "Focused on software development, algorithms, and system design with hands-on projects in web and mobile development.",
+    title: "Innobiz Recognition",
+    issuer: "Innobiz",
+    images: [
+      "/certificate/innobiz/00.jpg",
+      "/certificate/innobiz/01.jpg",
+      "/certificate/innobiz/02.jpg",
+      "/certificate/innobiz/1739710290096-min.jpg",
+    ],
   },
   {
-    type: "education",
-    institution: "Ethiopian Technical University",
-    degree: "Diploma in Computer Science",
-    period: "2017 - 2019",
-    description: "Foundation in programming fundamentals, database management, and computer systems.",
+    title: "Udacity Android",
+    issuer: "Udacity",
+    images: ["/certificate/udacity-android.jpg"],
+  },
+  {
+    title: "Jirtuu Recognition",
+    issuer: "Jirtuu Software Labs",
+    images: ["/certificate/recognition-jirtuu.jpg"],
   },
 ]
 
-const certificationData = [
-  {
-    type: "certification",
-    title: "AWS Certified Developer",
-    issuer: "Amazon Web Services",
-    period: "2023",
-    description: "Certified in developing and maintaining applications on AWS platform.",
-  },
-  {
-    type: "certification",
-    title: "Google Cloud Professional",
-    issuer: "Google Cloud",
-    period: "2023",
-    description: "Professional certification in cloud architecture and development.",
-  },
-  {
-    type: "certification",
-    title: "React Developer Certification",
-    issuer: "Meta",
-    period: "2022",
-    description: "Advanced certification in React development and modern JavaScript.",
-  },
-]
+function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: string; rotateMs?: number }) {
+  const [idx, setIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const hasMany = images.length > 1
+
+  useEffect(() => {
+    if (!hasMany || paused) return
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), rotateMs)
+    return () => clearInterval(t)
+  }, [images.length, rotateMs, paused, hasMany])
+
+  return (
+    <div
+      className="group relative w-full overflow-hidden rounded-xl border border-gray-200 bg-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* 4:3 aspect ratio wrapper using padding-top */}
+      <div className="relative w-full pt-[75%]">
+        {images.map((src, i) => (
+          <Image
+            key={src + i}
+            src={src}
+            alt={alt}
+            fill
+            className={`absolute inset-0 object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={i === 0}
+          />
+        ))}
+      </div>
+      {hasMany && (
+        <div className="absolute bottom-3 right-3 flex gap-1">
+          {images.map((_, i) => (
+            <span key={i} className={`h-2 w-2 rounded-full ${i === idx ? "bg-black" : "bg-black/40"}`} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function EducationSection() {
   return (
-    <section id="education" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">Education</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            My academic background and professional certifications that shaped my expertise in software development.
-          </p>
-        </motion.div>
+    <section id="milestone" className="pt-8 pb-24 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header strip: 04 | MILESTONE */}
+        <div className="mb-12">
+          <div className="flex items-center mb-6">
+            <span className="text-sm font-mono text-gray-500 mr-4">04</span>
+            <div className="h-px bg-gray-200 flex-1"></div>
+            <span className="text-sm font-mono text-gray-500 mx-4">MILESTONE</span>
+          </div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Education */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center mb-8">
-              <GraduationCap className="w-8 h-8 text-black mr-3" />
-              <h3 className="text-2xl font-bold text-black">Education</h3>
-            </div>
-
-            <div className="space-y-6">
-              {educationData.map((item, index) => (
-                <div key={index} className="border-l-2 border-gray-200 pl-6 pb-6">
-                  <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-black mb-2">{item.degree}</h4>
-                    <p className="text-lg text-gray-700 mb-2">{item.institution}</p>
-                    <p className="text-sm text-gray-500 mb-3">{item.period}</p>
-                    <p className="text-gray-600">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Certifications */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center mb-8">
-              <Award className="w-8 h-8 text-black mr-3" />
-              <h3 className="text-2xl font-bold text-black">Certifications</h3>
-            </div>
-
-            <div className="space-y-6">
-              {certificationData.map((item, index) => (
-                <div key={index} className="border-l-2 border-gray-200 pl-6 pb-6">
-                  <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <h4 className="text-xl font-semibold text-black mb-2">{item.title}</h4>
-                    <p className="text-lg text-gray-700 mb-2">{item.issuer}</p>
-                    <p className="text-sm text-gray-500 mb-3">{item.period}</p>
-                    <p className="text-gray-600">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+        {/* Certificates Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {certificates.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.07 }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="flex flex-col"
+            >
+              <AutoSlider images={c.images} alt={c.title} />
+              <div className="mt-3">
+                <div className="text-sm font-mono text-gray-500">Certificate</div>
+                <h3 className="text-lg font-semibold text-black">{c.title}</h3>
+                {c.issuer && <p className="text-sm text-gray-600">{c.issuer}</p>}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

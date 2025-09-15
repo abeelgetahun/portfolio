@@ -6,6 +6,7 @@ const footerLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Careers", href: "#experience" },
+  { name: "Milestone", href: "#milestone" },
 ]
 
 export default function Footer() {

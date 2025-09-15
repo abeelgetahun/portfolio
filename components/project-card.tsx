@@ -1,9 +1,10 @@
 "use client"
 
+import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
-import React, { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from "react-dom"
 
 interface ProjectCardProps {
@@ -33,13 +34,16 @@ export default function ProjectCard({
   isVisible,
   rotateIntervalMs = 3500,
 }: ProjectCardProps) {
+  // Guard alias: some stale builds referenced unqualified `useState`
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const useState = React.useState
   const mergedImages = images && images.length > 0 ? images : image ? [image] : ["/placeholder.svg"]
-  const [current, setCurrent] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [current, setCurrent] = React.useState(0)
+  const [paused, setPaused] = React.useState(false)
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
+  const [lightboxIndex, setLightboxIndex] = React.useState<number | null>(null)
   const pushedStateRef = useRef(false)
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = React.useState(false)
   const touchStartX = useRef<number | null>(null)
 
   useEffect(() => {

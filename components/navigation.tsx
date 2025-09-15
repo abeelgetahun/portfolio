@@ -9,7 +9,7 @@ const navItems = [
   { name: "Projects", href: "#projects" },
   { name: "Careers", href: "#experience" },
   // { name: "Articles", href: "#", disabled: true }, // Commented out by request
-  { name: "Education", href: "#education" },
+  { name: "Milestone", href: "#milestone" },
 ]
 
 export default function Navigation() {
