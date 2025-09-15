@@ -154,13 +154,13 @@ function MarqueeTechStack() {
 
   const style: React.CSSProperties = {
     ['--marquee-distance' as any]: distance ? `${distance}px` : '0px',
-    ['--marquee-duration' as any]: '32s',
+    ['--marquee-duration' as any]: '55s',
   }
 
   return (
     <div className="mt-14">
       <SectionTitle className="mb-4">Tech Stack</SectionTitle>
-      <div ref={wrapperRef} className="relative overflow-hidden h-16">
+      <div ref={wrapperRef} className="relative overflow-hidden h-16 marquee-fade" data-marquee-wrapper>
         <div className="marquee-dual relative flex" style={style}>
           <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">
             {tools.map((tool, i) => (
@@ -186,4 +186,18 @@ function MarqueeItem({ tool, hiddenLabel }: { tool: { name: string; icon?: strin
       <span className="text-sm font-medium text-gray-800">{tool.name}</span>
     </div>
   )
+}
+
+// Feature detection for mask-image (client-side only). Adds fallback class if unsupported.
+if (typeof window !== 'undefined') {
+  try {
+    const supportsMask = CSS?.supports?.('mask-image', 'linear-gradient(to right, black, white)')
+    if (!supportsMask) {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-marquee-wrapper]').forEach((el) => {
+          el.classList.add('supports-no-mask')
+        })
+      })
+    }
+  } catch {/* ignore */}
 }

@@ -330,6 +330,33 @@
     animation: marquee-variable var(--marquee-duration,32s) linear infinite;
   }
 
+  /* Edge fade overlay for marquee */
+  .marquee-fade {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    position: relative;
+  }
+
+  /* Fallback using pseudo elements if mask unsupported */
+  .marquee-fade.supports-no-mask::before,
+  .marquee-fade.supports-no-mask::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .marquee-fade.supports-no-mask::before {
+    left: 0;
+    background: linear-gradient(to right, var(--background), transparent);
+  }
+  .marquee-fade.supports-no-mask::after {
+    right: 0;
+    background: linear-gradient(to left, var(--background), transparent);
+  }
+
   .scroll-indicator {
     position: fixed;
     top: 0;
