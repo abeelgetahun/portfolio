@@ -46,7 +46,7 @@ export default function AboutSection() {
   }, [])
 
   return (
-  <section id="about-content" ref={sectionRef} className="pt-16 pb-24 bg-white">
+  <section id="about-content" ref={sectionRef} className="pt-16 pb-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`transition-all duration-1000 ${
@@ -125,6 +125,8 @@ export default function AboutSection() {
 
           {/* Tech Stack ticker below to keep rhythm with design */}
           <MarqueeTechStack />
+          {/* Anchor marker for external nav linking to start of projects */}
+          <div id="projects" className="h-4" aria-hidden="true" />
         </div>
       </div>
     </section>
@@ -158,8 +160,8 @@ function MarqueeTechStack() {
   }
 
   return (
-    <div className="mt-14">
-      <SectionTitle className="mb-4">Tech Stack</SectionTitle>
+    <div className="mt-10 mb-4" id="tech-stack">
+      <SectionTitle className="mb-2">Tech Stack</SectionTitle>
       <div ref={wrapperRef} className="relative overflow-hidden h-16 marquee-fade" data-marquee-wrapper>
         <div className="marquee-dual relative flex" style={style}>
           <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">
