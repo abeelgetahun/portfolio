@@ -30,25 +30,21 @@ export default function HeroSection() {
     // Make this the About anchor as requested
     <section
       id="about"
-      className="min-h-screen bg-white flex items-center justify-center pt-20 pb-8 scroll-mt-36"
+      className="min-h-screen bg-white flex items-center justify-center pt-0 pb-8 scroll-mt-36"
     >
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center">
           {/* Left side - Profile Image */}
           <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
-            <div className="relative">
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/profile/profile-1.png"
-                  alt="Abel Getahun"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-black rounded-2xl opacity-10 rotate-12"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gray-300 rounded-xl opacity-20 -rotate-12"></div>
+            <div className="w-80 h-80 lg:w-96 lg:h-96">
+              <Image
+                src="/profile/profile-1.png"
+                alt="Abel Getahun"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
           </div>
 

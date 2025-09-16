@@ -5,6 +5,7 @@ import ExperienceSection from "@/components/sections/experience-section"
 import EducationSection from "@/components/sections/education-section"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
+// Paper removed per request; using side-only elevation utility
 
 export default function Home() {
   return (
@@ -53,20 +54,26 @@ export default function Home() {
         />
       </div>
 
-      <HeroSection />
-      <div className="section-divider">
-        <AboutSection />
+      <div className="relative z-10">
+  <div className="mx-auto max-w-7xl px-0 sm:px-3 md:px-5 lg:px-8 mt-0 mb-10">
+          <div className="page-lines mx-2 sm:mx-4 md:mx-6 lg:mx-8 pt-8 sm:pt-10 md:pt-12 px-3 sm:px-5 md:px-8">
+            <HeroSection />
+            <div className="section-divider">
+              <AboutSection />
+            </div>
+            <div className="section-divider">
+              <ProjectsSection />
+            </div>
+            <div className="section-divider">
+              <ExperienceSection />
+            </div>
+            <div className="section-divider">
+              <EducationSection />
+            </div>
+            <Footer />
+          </div>
+        </div>
       </div>
-      <div className="section-divider">
-        <ProjectsSection />
-      </div>
-      <div className="section-divider">
-        <ExperienceSection />
-      </div>
-      <div className="section-divider">
-        <EducationSection />
-      </div>
-      <Footer />
     </main>
   )
 }

@@ -122,10 +122,9 @@
   }
 
   body {
-    @apply bg-white text-foreground;
-    /* Added subtle background pattern */
-    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
-    background-size: 20px 20px;
+    @apply text-foreground;
+    /* Outside page area */
+    background-color: #FAFAFA;
   }
 
   .font-heading {
@@ -358,4 +357,87 @@
   }
 
   /* scroll indicator removed */
+}
+
+@layer utilities {
+  /* Hide native scrollbar but keep scrolling */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  /* Elevated paper sheet look */
+  .paper-sheet {
+    position: relative;
+    background: var(--color-card);
+    border-radius: var(--radius-xl);
+  }
+
+  /* Realistic, soft multi-layer shadow for elevation */
+  .paper-shadow {
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.04),
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 12px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Subtle paper grain and edge falloff */
+  .paper-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.03) 1px, transparent 1.5px),
+      radial-gradient(circle at 80% 30%, rgba(0,0,0,0.02) 1px, transparent 1.5px),
+      radial-gradient(circle at 40% 80%, rgba(0,0,0,0.02) 1px, transparent 1.5px),
+      linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02));
+    background-size: 24px 24px, 28px 28px, 26px 26px, 100% 100%;
+    opacity: 0.4;
+    mask-image: radial-gradient(120% 120% at 50% 40%, #000 65%, transparent 100%);
+    -webkit-mask-image: radial-gradient(120% 120% at 50% 40%, #000 65%, transparent 100%);
+  }
+
+  /* Optional lined-paper variant when desired */
+  .paper-lined::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 28px,
+      color-mix(in oklch, var(--color-border) 60%, transparent) 29px
+    );
+    opacity: 0.35;
+  }
+
+  /* edge-elevation removed per request (no page side shadows) */
+}
+
+@layer utilities {
+  /* White page body with very thin vertical lines */
+  .page-lines {
+    position: relative;
+    isolation: isolate;
+    background-color: #ffffff;
+  }
+  .page-lines::before,
+  .page-lines::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px; /* very very thin */
+    background-color: #f7f7f7;
+    pointer-events: none;
+      z-index: 1;
+  }
+  .page-lines::before { left: 0; }
+  .page-lines::after { right: 0; }
 }

@@ -32,71 +32,93 @@ export default function AboutSection() {
           <SectionTitle className="mb-3 text-2xl md:text-3xl">Highlights</SectionTitle>
 
           {/* Horizontal scroller */}
-          <div className="-mx-4 sm:-mx-6 lg:-mx-8">
-            <div className="relative px-4 sm:px-6 lg:px-8 overflow-x-auto">
-              {/* Edge fade */}
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent" />
-              <div className="pointer-events-none absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent" />
-
+          <div className="relative">
+            <div
+              className="px-3 sm:px-5 md:px-8 overflow-x-auto no-scrollbar group"
+              id="highlights-scroll"
+              onMouseEnter={(e) => {
+                const ind = (e.currentTarget.querySelector('[data-hi-ind]') as HTMLElement)
+                if (ind) ind.style.opacity = '1'
+              }}
+              onMouseLeave={(e) => {
+                const ind = (e.currentTarget.querySelector('[data-hi-ind]') as HTMLElement)
+                if (ind) ind.style.opacity = '0'
+              }}
+              onScroll={(e) => {
+                const ind = (e.currentTarget.querySelector('[data-hi-ind]') as HTMLElement)
+                if (!ind) return
+                ind.style.opacity = '1'
+                window.clearTimeout((ind as any)._t)
+                ;(ind as any)._t = window.setTimeout(() => {
+                  ind.style.opacity = '0'
+                }, 900)
+              }}
+            >
               <div className="flex gap-4 snap-x snap-mandatory py-2">
                 {/* Card 1 */}
                 <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
                   <h3 className="text-lg font-semibold text-black mb-2">Software Engineer</h3>
-                  <p className="text-sm text-gray-600">
-                    Building reliable, maintainable systems with a focus on clean architecture and developer
-                    experience.
-                  </p>
+                  <p className="text-sm text-gray-600">Building reliable, maintainable systems with a focus on clean architecture and developer experience.</p>
                 </div>
 
                 {/* Card 2 */}
                 <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
                   <h3 className="text-lg font-semibold text-black mb-2">AI & ML Enthusiast</h3>
-                  <p className="text-sm text-gray-600">
-                    Exploring applied ML for real products — from data to deployment, responsibly.
-                  </p>
+                  <p className="text-sm text-gray-600">Exploring applied ML for real products — from data to deployment, responsibly.</p>
                 </div>
 
                 {/* Card 3 */}
                 <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
                   <h3 className="text-lg font-semibold text-black mb-2">Mobile & Web Development</h3>
-                  <p className="text-sm text-gray-600">
-                    Crafting fast, accessible apps with modern stacks across web and mobile surfaces.
-                  </p>
+                  <p className="text-sm text-gray-600">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
                 </div>
 
-                {/* Card 4 */}
+                {/* Card 4 - Competitive Programming */}
                 <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <div className="text-xs font-mono text-gray-500 mb-2">AREA</div>
                   <h3 className="text-lg font-semibold text-black mb-2">Competitive Programming</h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.
-                  </p>
+                  <p className="text-sm text-gray-600 mb-3">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
                   <div className="flex items-center gap-3">
-                    <a
-                      href="https://leetcode.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-black hover:underline"
-                    >
-                      <img src="https://cdn.simpleicons.org/leetcode/FFA116" alt="LeetCode" className="w-4 h-4" />
-                      LeetCode
+                    <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
+                      <img src="https://cdn.simpleicons.org/leetcode/FFA116" alt="" className="w-4 h-4" />
                     </a>
-                    <a
-                      href="https://codeforces.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-black hover:underline"
-                    >
-                      <img src="https://cdn.simpleicons.org/codeforces/1F8ACB" alt="Codeforces" className="w-4 h-4" />
-                      Codeforces
+                    <a href="https://codeforces.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
+                      <img src="https://cdn.simpleicons.org/codeforces/1F8ACB" alt="" className="w-4 h-4" />
                     </a>
                   </div>
                 </div>
               </div>
+
+              {/* Auto-hide scroll hint line */}
+              <div data-hi-ind style={{ opacity: 0, transition: 'opacity 200ms ease' }} className="absolute left-1/2 -translate-x-1/2 bottom-0 h-0.5 w-24 bg-gray-200 rounded-full" />
             </div>
+
+            {/* Fixed fog overlays and arrows anchored to wrapper */}
+            <div className="hidden sm:block pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white to-transparent z-10" />
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('highlights-scroll')
+                if (!el) return
+                el.scrollBy({ left: -320, behavior: 'smooth' })
+              }}
+              aria-label="Scroll left"
+              className="hidden sm:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
+            >
+              <span className="text-lg leading-none">‹</span>
+            </button>
+            <div className="hidden sm:block pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white to-transparent z-10" />
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('highlights-scroll')
+                if (!el) return
+                el.scrollBy({ left: 320, behavior: 'smooth' })
+              }}
+              aria-label="Scroll right"
+              className="hidden sm:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
+            >
+              <span className="text-lg leading-none">›</span>
+            </button>
           </div>
 
           {/* Tech Stack ticker below to keep rhythm with design */}
