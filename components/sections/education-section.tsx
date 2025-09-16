@@ -76,7 +76,7 @@ function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: s
 
 export default function EducationSection() {
   return (
-  <section id="milestone" className="pt-8 pb-24 bg-white scroll-mt-28">
+  <section id="milestone" className="pt-12 pb-16 bg-white scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header strip: 04 | MILESTONE */}
         <div className="mb-12">
