@@ -55,16 +55,16 @@ export default function HeroSection() {
             {/* Name and Title */}
             <div className="mb-4 lg:mb-6">
               {/* ABOUT label moved here above the name */}
-              <div className="mt-6 mb-6 flex items-center justify-center lg:justify-start w-full">
-                <span className="text-sm font-mono text-gray-500 mr-4">01</span>
+              <div className="mt-5 mb-5 flex items-center justify-center lg:justify-start w-full">
+                <span className="text-xs font-mono text-gray-500 mr-3">01</span>
                 <div className="h-px bg-gray-200 flex-1"></div>
-                <span className="text-sm font-mono text-gray-500 ml-4">ABOUT</span>
+                <span className="text-xs font-mono text-gray-500 ml-3 tracking-wide">ABOUT</span>
               </div>
-              <h1 className="font-heading text-4xl lg:text-5xl xl:text-6xl font-bold text-black mb-2 tracking-tight">
+              <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-semibold text-black mb-1 tracking-tight">
                 Abel Getahun
               </h1>
-              <div className="h-8 mb-4">
-                <p className="text-lg lg:text-xl text-gray-600 font-medium">
+              <div className="h-7 mb-3">
+                <p className="text-base lg:text-lg text-gray-600 font-normal">
                   {typedText}
                   <span className="animate-pulse">|</span>
                 </p>
@@ -72,13 +72,13 @@ export default function HeroSection() {
             </div>
 
             {/* Description */}
-            <div className="mb-8 max-w-lg">
-              <p className="text-gray-700 leading-relaxed text-base lg:text-lg">
+            <div className="mb-7 max-w-lg">
+              <p className="text-gray-700 leading-relaxed text-[0.95rem] lg:text-base">
                 Hello! My name is Abel and I enjoy creating tech solutions to my daily problems. My interest in software
                 development started back in 2013 when I accidentally stumbled upon a batch programming ebook in one of
                 my harddrives — turns out there's so much you could do on a black & white terminal.
               </p>
-              <p className="text-gray-700 leading-relaxed text-base lg:text-lg mt-4">
+              <p className="text-gray-700 leading-relaxed text-[0.95rem] lg:text-base mt-3.5">
                 Fast-forward to today, and I've had the privilege of working at multiple start ups, an event organizing
                 company, a huge corporation, campus clubs and handled government projects. My main focus these days is
                 building modern, minimal and powerful products and digital experiences at Dream Intelligence for the

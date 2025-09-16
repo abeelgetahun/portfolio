@@ -29,7 +29,7 @@ export default function AboutSection() {
   <section id="about-content" className="pt-12 pb-12 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div>
-          <SectionTitle className="mb-2 text-xl md:text-2xl">Highlights</SectionTitle>
+          <SectionTitle className="mb-2 text-lg md:text-xl font-semibold">Highlights</SectionTitle>
 
           {/* Horizontal scroller */}
           <div className="relative">
@@ -57,25 +57,25 @@ export default function AboutSection() {
               <div className="flex gap-3 snap-x snap-mandatory py-1.5">
                 {/* Card 1 */}
                 <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-base font-semibold text-black mb-1.5">Software Engineer</h3>
+                  <h3 className="text-sm font-medium text-black mb-1.5">Software Engineer</h3>
                   <p className="text-xs text-gray-600">Building reliable, maintainable systems with a focus on clean architecture and developer experience.</p>
                 </div>
 
                 {/* Card 2 */}
                 <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-base font-semibold text-black mb-1.5">AI & ML Enthusiast</h3>
+                  <h3 className="text-sm font-medium text-black mb-1.5">AI & ML Enthusiast</h3>
                   <p className="text-xs text-gray-600">Exploring applied ML for real products — from data to deployment, responsibly.</p>
                 </div>
 
                 {/* Card 3 */}
                 <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-base font-semibold text-black mb-1.5">Mobile & Web Development</h3>
+                  <h3 className="text-sm font-medium text-black mb-1.5">Mobile & Web Development</h3>
                   <p className="text-xs text-gray-600">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
                 </div>
 
                 {/* Card 4 - Competitive Programming */}
                 <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-base font-semibold text-black mb-1.5">Competitive Programming</h3>
+                  <h3 className="text-sm font-medium text-black mb-1.5">Competitive Programming</h3>
                   <p className="text-xs text-gray-600 mb-2.5">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
                   <div className="flex items-center gap-2.5">
                     <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
@@ -164,8 +164,8 @@ function MarqueeTechStack() {
   }
 
   return (
-    <div className="mt-10 mb-4" id="tech-stack">
-  <SectionTitle className="mb-2 text-xl md:text-2xl">Tech Stack</SectionTitle>
+    <div className="mt-12 mb-5" id="tech-stack">
+  <SectionTitle className="mb-4 text-lg md:text-xl font-semibold">Tech Stack</SectionTitle>
   <div ref={wrapperRef} className="relative overflow-hidden h-14 marquee-fade" data-marquee-wrapper>
         <div className="marquee-dual relative flex" style={style}>
           <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">

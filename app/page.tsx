@@ -4,12 +4,14 @@ import ProjectsSection from "@/components/sections/projects-section"
 import ExperienceSection from "@/components/sections/experience-section"
 import EducationSection from "@/components/sections/education-section"
 import Navigation from "@/components/navigation"
+import ScrollIndicator from "@/components/scroll-indicator"
 import Footer from "@/components/footer"
 // Paper removed per request; using side-only elevation utility
 
 export default function Home() {
   return (
     <main className="relative">
+      <ScrollIndicator />
       <Navigation />
 
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
