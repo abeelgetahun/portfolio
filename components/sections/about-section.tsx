@@ -29,7 +29,7 @@ export default function AboutSection() {
   <section id="about-content" className="pt-12 pb-12 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div>
-          <SectionTitle className="mb-3 text-2xl md:text-3xl">Highlights</SectionTitle>
+          <SectionTitle className="mb-2 text-xl md:text-2xl">Highlights</SectionTitle>
 
           {/* Horizontal scroller */}
           <div className="relative">
@@ -54,35 +54,43 @@ export default function AboutSection() {
                 }, 900)
               }}
             >
-              <div className="flex gap-4 snap-x snap-mandatory py-2">
+              <div className="flex gap-3 snap-x snap-mandatory py-1.5">
                 {/* Card 1 */}
-                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-lg font-semibold text-black mb-2">Software Engineer</h3>
-                  <p className="text-sm text-gray-600">Building reliable, maintainable systems with a focus on clean architecture and developer experience.</p>
+                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-base font-semibold text-black mb-1.5">Software Engineer</h3>
+                  <p className="text-xs text-gray-600">Building reliable, maintainable systems with a focus on clean architecture and developer experience.</p>
                 </div>
 
                 {/* Card 2 */}
-                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-lg font-semibold text-black mb-2">AI & ML Enthusiast</h3>
-                  <p className="text-sm text-gray-600">Exploring applied ML for real products — from data to deployment, responsibly.</p>
+                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-base font-semibold text-black mb-1.5">AI & ML Enthusiast</h3>
+                  <p className="text-xs text-gray-600">Exploring applied ML for real products — from data to deployment, responsibly.</p>
                 </div>
 
                 {/* Card 3 */}
-                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-lg font-semibold text-black mb-2">Mobile & Web Development</h3>
-                  <p className="text-sm text-gray-600">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
+                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-base font-semibold text-black mb-1.5">Mobile & Web Development</h3>
+                  <p className="text-xs text-gray-600">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
                 </div>
 
                 {/* Card 4 - Competitive Programming */}
-                <div className="min-w-[260px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-lg font-semibold text-black mb-2">Competitive Programming</h3>
-                  <p className="text-sm text-gray-600 mb-3">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
-                  <div className="flex items-center gap-3">
+                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-base font-semibold text-black mb-1.5">Competitive Programming</h3>
+                  <p className="text-xs text-gray-600 mb-2.5">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
+                  <div className="flex items-center gap-2.5">
                     <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
-                      <img src="https://cdn.simpleicons.org/leetcode/FFA116" alt="" className="w-4 h-4" />
+                      <span
+                        className="icon-bg-shimmer"
+                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("https://cdn.simpleicons.org/leetcode/FFA116")' }}
+                        aria-hidden="true"
+                      />
                     </a>
                     <a href="https://codeforces.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
-                      <img src="https://cdn.simpleicons.org/codeforces/1F8ACB" alt="" className="w-4 h-4" />
+                      <span
+                        className="icon-bg-shimmer"
+                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("https://cdn.simpleicons.org/codeforces/1F8ACB")' }}
+                        aria-hidden="true"
+                      />
                     </a>
                   </div>
                 </div>
@@ -157,8 +165,8 @@ function MarqueeTechStack() {
 
   return (
     <div className="mt-10 mb-4" id="tech-stack">
-      <SectionTitle className="mb-3 text-2xl md:text-3xl">Tech Stack</SectionTitle>
-      <div ref={wrapperRef} className="relative overflow-hidden h-16 marquee-fade" data-marquee-wrapper>
+  <SectionTitle className="mb-2 text-xl md:text-2xl">Tech Stack</SectionTitle>
+  <div ref={wrapperRef} className="relative overflow-hidden h-14 marquee-fade" data-marquee-wrapper>
         <div className="marquee-dual relative flex" style={style}>
           <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">
             {tools.map((tool, i) => (
@@ -179,9 +187,9 @@ function MarqueeTechStack() {
 
 function MarqueeItem({ tool, hiddenLabel }: { tool: { name: string; icon?: string }; hiddenLabel?: boolean }) {
   return (
-    <div className="flex items-center gap-3 px-4 py-3 whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity">
-      <img src={tool.icon || '/placeholder.svg'} alt={hiddenLabel ? '' : tool.name} className="w-6 h-6" />
-      <span className="text-sm font-medium text-gray-800">{tool.name}</span>
+    <div className="flex items-center gap-2.5 px-3 py-2.5 whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity">
+      <img src={tool.icon || '/placeholder.svg'} alt={hiddenLabel ? '' : tool.name} className="w-5 h-5" />
+      <span className="text-xs font-medium text-gray-800">{tool.name}</span>
     </div>
   )
 }
