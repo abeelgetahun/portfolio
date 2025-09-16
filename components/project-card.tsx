@@ -17,7 +17,6 @@ interface ProjectCardProps {
   demo: string
   icon: string
   index: number
-  isVisible: boolean
   rotateIntervalMs?: number
 }
 
@@ -31,7 +30,6 @@ export default function ProjectCard({
   demo,
   icon,
   index,
-  isVisible,
   rotateIntervalMs = 3500,
 }: ProjectCardProps) {
   // Guard alias: some stale builds referenced unqualified `useState`
@@ -119,10 +117,7 @@ export default function ProjectCard({
 
   return (
     <Card
-      className={`group transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-gray-200/60 bg-transparent hover:bg-gray-50/80 shadow-none overflow-hidden ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-      }`}
-      style={{ transitionDelay: `${index * 150}ms` }}
+      className={`group transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-gray-200/60 bg-transparent hover:bg-gray-50/80 shadow-none overflow-hidden`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

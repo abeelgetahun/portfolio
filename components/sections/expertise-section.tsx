@@ -47,23 +47,7 @@ const expertiseCards = [
 export default function ExpertiseSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
-  const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.3 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
 
   useEffect(() => {
     if (!isAutoScrolling) return
@@ -103,14 +87,10 @@ export default function ExpertiseSection() {
   }
 
   return (
-    <section id="expertise" ref={sectionRef} className="py-20 bg-gray-50 relative overflow-hidden">
+  <section id="expertise" ref={sectionRef} className="py-20 bg-gray-50 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2
-            className={`font-heading text-4xl md:text-5xl font-bold text-black mb-6 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-black mb-6">
             What I Do
           </h2>
         </div>

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
 
 type Certificate = {
   title: string
@@ -90,22 +89,15 @@ export default function EducationSection() {
 
         {/* Certificates Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certificates.map((c, i) => (
-            <motion.div
-              key={c.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="flex flex-col"
-            >
+          {certificates.map((c) => (
+            <div key={c.title} className="flex flex-col">
               <AutoSlider images={c.images} alt={c.title} />
               <div className="mt-3">
                 <div className="text-sm font-mono text-gray-500">Certificate</div>
                 <h3 className="text-lg font-semibold text-black">{c.title}</h3>
                 {c.issuer && <p className="text-sm text-gray-600">{c.issuer}</p>}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

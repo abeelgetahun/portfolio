@@ -36,26 +36,10 @@ const experiences = [
 // education and certifications removed to focus on careers only
 
 export default function ExperienceSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.2 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  
 
   return (
-    <section id="experience" ref={sectionRef} className="py-24 bg-white">
+  <section id="experience" className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header strip only */}
         <div className="mb-12">
@@ -69,12 +53,7 @@ export default function ExperienceSection() {
         {/* Career Timeline */}
         <div className="space-y-12">
             {experiences.map((item, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-1000 delay-${index * 200} ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
-              >
+              <div key={index}>
                 <div className="relative">
                   {/* Timeline dot */}
                   <div className="absolute left-0 top-0 w-3 h-3 bg-gray-300 rounded-full"></div>

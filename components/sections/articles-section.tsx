@@ -1,6 +1,4 @@
 "use client"
-
-import { motion } from "framer-motion"
 import { Calendar, Clock, ArrowUpRight } from "lucide-react"
 
 const articles = [
@@ -46,27 +44,17 @@ export default function ArticlesSection() {
   return (
     <section id="articles" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">Articles</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Sharing knowledge and insights about modern web development, best practices, and emerging technologies.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {articles.map((article, index) => (
-            <motion.article
+            <article
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-4">
@@ -92,7 +80,7 @@ export default function ArticlesSection() {
                   {article.readTime}
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Mail, MapPin, Briefcase, Send, Github, Linkedin } from "lucide-react"
 
 export default function ContactSection() {
-  const [isVisible, setIsVisible] = useState(false)
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,21 +19,6 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.2 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -64,7 +49,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 contact-gradient relative overflow-hidden">
+  <section id="contact" ref={sectionRef} className="py-20 contact-gradient relative overflow-hidden">
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-20 h-20 border border-gray-600 rotate-45 animate-float opacity-20"></div>
@@ -80,29 +65,17 @@ export default function ContactSection() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2
-            className={`font-heading text-4xl md:text-5xl font-bold text-white mb-6 transition-all duration-1000 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
             {"Let's Build Something Amazing Together"}
           </h2>
-          <p
-            className={`text-xl text-gray-300 max-w-2xl mx-auto transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
-          >
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <div
-            className={`transition-all duration-1000 delay-500 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
-          >
+          <div>
             <Card className="bg-white/10 backdrop-blur-md border-gray-600">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -192,11 +165,7 @@ export default function ContactSection() {
           </div>
 
           {/* Contact Information */}
-          <div
-            className={`space-y-8 transition-all duration-1000 delay-700 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
-          >
+          <div className="space-y-8">
             <div className="space-y-6">
               <div className="flex items-center space-x-4 text-gray-300">
                 <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">

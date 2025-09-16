@@ -117,26 +117,10 @@ const projects = [
 ]
 
 export default function ProjectsSection() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting)
-      },
-      { threshold: 0.2 },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  
 
   return (
-  <section id="projects" ref={sectionRef} className="pt-8 pb-24 bg-white">
+  <section id="projects" className="pt-8 pb-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12">
@@ -159,7 +143,6 @@ export default function ProjectsSection() {
               demo={project.demo}
               icon={project.icon}
               index={index}
-              isVisible={isVisible}
             />
           ))}
         </div>
