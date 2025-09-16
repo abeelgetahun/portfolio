@@ -18,10 +18,18 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("about")
   const activeRef = useRef(activeSection)
+  // Lock active highlight briefly after click to avoid flicker while smooth scrolling
+  const [lockActive, setLockActive] = useState<string | null>(null)
+  const lockRef = useRef<string | null>(null)
+  const lockTimer = useRef<number | null>(null)
 
   useEffect(() => {
     activeRef.current = activeSection
   }, [activeSection])
+
+  useEffect(() => {
+    lockRef.current = lockActive
+  }, [lockActive])
 
   useEffect(() => {
     const groupKeys = navItems.filter((i) => !i.disabled).map((i) => i.href.substring(1))
@@ -42,6 +50,8 @@ export default function Navigation() {
   const ratios = new Map<string, number>()
 
     const computeAndSetActive = () => {
+      // If we're in a click-initiated smooth scroll, keep the clicked item highlighted
+      if (lockRef.current) return
       const vh = window.innerHeight
       const targetY = vh * 0.4
       let bestGroup: string | null = null
@@ -141,13 +151,33 @@ export default function Navigation() {
     }
   }, [])
 
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen])
+
   const scrollToSection = (href: string, disabled?: boolean) => {
     if (disabled) return
 
     const element = document.getElementById(href.substring(1))
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-      setActiveSection(href.substring(1))
+      // Highlight immediately, then lock updates briefly to avoid observer overriding
+      const target = href.substring(1)
+      setActiveSection(target)
+      setLockActive(target)
+      if (lockTimer.current) {
+        clearTimeout(lockTimer.current)
+      }
+      lockTimer.current = window.setTimeout(() => {
+        setLockActive(null)
+        lockTimer.current = null
+      }, 800)
+      element.scrollIntoView({ behavior: "smooth", block: 'start', inline: 'nearest' })
     }
     setIsOpen(false)
   }
@@ -215,6 +245,15 @@ export default function Navigation() {
           </div>
         )}
       </nav>
+
+      {/* Click-outside backdrop for mobile: closes menu when tapping outside */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 md:hidden bg-black/0"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
     </>
   )
 }

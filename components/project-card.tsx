@@ -138,16 +138,21 @@ export default function ProjectCard({
         ))}
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
         {mergedImages.length > 1 && (
-          <div className="absolute bottom-2 right-2 flex gap-1 z-10">
-            {mergedImages.map((_, i) => (
-              <span
-                key={i}
-                onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
-                className={`h-2 w-2 rounded-full bg-white/50 hover:bg-white cursor-pointer transition ${i === current ? 'ring-2 ring-white bg-white' : ''}`}
-              />
-            ))}
+          <div className="absolute bottom-2 right-2 z-10">
+            <div className="flex gap-1 rounded-full bg-black/40 backdrop-blur-sm px-2 py-1 shadow-sm">
+              {mergedImages.map((_, i) => (
+                <span
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+                  className={`h-2 w-2 rounded-full bg-white/90 hover:bg-white cursor-pointer transition outline outline-1 outline-black/40 ${i === current ? 'ring-2 ring-white bg-white' : ''}`}
+                />
+              ))}
+            </div>
           </div>
         )}
+
+        {/* Bottom gradient to improve overlay control contrast on bright images */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
 
         <div className="absolute top-4 left-4">
           <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
@@ -210,7 +215,7 @@ export default function ProjectCard({
         >
           <button
             aria-label="Close image"
-            className="absolute top-4 right-4 rounded-full bg-white/10 hover:bg-white/20 text-white p-2 backdrop-blur-md border border-white/20"
+            className="absolute top-4 right-4 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md"
             onClick={(e) => { e.stopPropagation(); closeLightbox() }}
           >
             <X className="w-6 h-6" />
@@ -219,14 +224,14 @@ export default function ProjectCard({
             <>
               <button
                 aria-label="Previous image"
-                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 hover:bg-white/20 text-white p-2 backdrop-blur-md border border-white/20"
+                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md"
                 onClick={(e) => { e.stopPropagation(); prevImage() }}
               >
                 <ChevronLeft className="w-7 h-7" />
               </button>
               <button
                 aria-label="Next image"
-                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 hover:bg-white/20 text-white p-2 backdrop-blur-md border border-white/20"
+                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md"
                 onClick={(e) => { e.stopPropagation(); nextImage() }}
               >
                 <ChevronRight className="w-7 h-7" />
@@ -234,7 +239,7 @@ export default function ProjectCard({
             </>
           )}
           <div
-            className="relative max-w-[92vw] max-h-[88vh]"
+            className="relative z-0 max-w-[92vw] max-h-[88vh]"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={(e) => { touchStartX.current = e.changedTouches[0].clientX }}
             onTouchEnd={(e) => {
