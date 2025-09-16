@@ -30,13 +30,13 @@ export default function HeroSection() {
     // Make this the About anchor as requested
     <section
       id="about"
-      className="min-h-screen bg-white flex items-center justify-center pt-0 pb-8 scroll-mt-36"
+      className="bg-white pt-12 pb-16 scroll-mt-28"
     >
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center">
+  <div className="grid lg:grid-cols-2 gap-3 lg:gap-4 items-center">
           {/* Left side - Profile Image */}
           <div className="order-1 lg:order-1 flex justify-center lg:justify-start">
-            <div className="w-80 h-80 lg:w-96 lg:h-96">
+            <div className="w-60 h-60 sm:w-64 sm:h-64 lg:w-72 lg:h-72">
               <Image
                 src="/profile/profile-1.png"
                 alt="Abel Getahun"
@@ -49,7 +49,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right side - Content */}
-          <div className="order-2 lg:order-2 text-center lg:text-left">
+          <div className="order-2 lg:order-2 text-center lg:text-left lg:-ml-12">
             {/* Removed decorative icon above the name as requested */}
 
             {/* Name and Title */}
@@ -60,11 +60,11 @@ export default function HeroSection() {
                 <div className="h-px bg-gray-200 flex-1"></div>
                 <span className="text-xs font-mono text-gray-500 ml-3 tracking-wide">ABOUT</span>
               </div>
-              <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-semibold text-black mb-1 tracking-tight">
+              <h1 className="font-heading text-2xl lg:text-3xl xl:text-4xl font-semibold text-black mb-1 tracking-tight">
                 Abel Getahun
               </h1>
               <div className="h-7 mb-3">
-                <p className="text-base lg:text-lg text-gray-600 font-normal">
+                <p className="text-sm lg:text-base text-gray-600 font-normal">
                   {typedText}
                   <span className="animate-pulse">|</span>
                 </p>
@@ -73,12 +73,12 @@ export default function HeroSection() {
 
             {/* Description */}
             <div className="mb-7 max-w-lg">
-              <p className="text-gray-700 leading-relaxed text-[0.95rem] lg:text-base">
+              <p className="text-gray-700 leading-relaxed text-[0.9rem] lg:text-[0.95rem]">
                 Hello! My name is Abel and I enjoy creating tech solutions to my daily problems. My interest in software
                 development started back in 2013 when I accidentally stumbled upon a batch programming ebook in one of
                 my harddrives — turns out there's so much you could do on a black & white terminal.
               </p>
-              <p className="text-gray-700 leading-relaxed text-[0.95rem] lg:text-base mt-3.5">
+              <p className="text-gray-700 leading-relaxed text-[0.9rem] lg:text-[0.95rem] mt-3.5">
                 Fast-forward to today, and I've had the privilege of working at multiple start ups, an event organizing
                 company, a huge corporation, campus clubs and handled government projects. My main focus these days is
                 building modern, minimal and powerful products and digital experiences at Dream Intelligence for the

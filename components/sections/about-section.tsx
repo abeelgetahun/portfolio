@@ -29,7 +29,7 @@ export default function AboutSection() {
   <section id="about-content" className="pt-12 pb-12 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div>
-          <SectionTitle className="mb-2 text-lg md:text-xl font-semibold">Highlights</SectionTitle>
+          <SectionTitle className="mb-2 text-base md:text-lg font-semibold">Highlights</SectionTitle>
 
           {/* Horizontal scroller */}
           <div className="relative">
@@ -165,7 +165,7 @@ function MarqueeTechStack() {
 
   return (
     <div className="mt-12 mb-5" id="tech-stack">
-  <SectionTitle className="mb-4 text-lg md:text-xl font-semibold">Tech Stack</SectionTitle>
+  <SectionTitle className="mb-4 text-base md:text-lg font-semibold">Tech Stack</SectionTitle>
   <div ref={wrapperRef} className="relative overflow-hidden h-14 marquee-fade" data-marquee-wrapper>
         <div className="marquee-dual relative flex" style={style}>
           <div ref={firstRef} className="flex shrink-0" aria-label="Technology stack scrolling list">
