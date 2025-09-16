@@ -25,8 +25,6 @@ const tools = [
 ]
 
 export default function AboutSection() {
-  
-
   return (
   <section id="about-content" className="pt-16 pb-16 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,8 +101,6 @@ export default function AboutSection() {
 
           {/* Tech Stack ticker below to keep rhythm with design */}
           <MarqueeTechStack />
-          {/* Anchor marker for external nav linking to start of projects */}
-          <div id="projects" className="h-4" aria-hidden="true" />
         </div>
       </div>
     </section>

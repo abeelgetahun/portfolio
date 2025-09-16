@@ -120,7 +120,7 @@ export default function ProjectsSection() {
   
 
   return (
-  <section id="projects" className="pt-8 pb-24 bg-white">
+  <section id="projects" className="pt-8 pb-24 bg-white scroll-mt-28">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-12">
