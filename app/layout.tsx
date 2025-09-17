@@ -4,6 +4,7 @@ import { Suspense } from "react"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import "./globals.css"
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "Ab_el",
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
   <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <Analytics />
       </body>
     </html>
   )
