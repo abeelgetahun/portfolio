@@ -2,7 +2,8 @@
 
 import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { TechIconsRow } from "@/components/ui/tech-icon"
+import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Lock } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useRef } from 'react'
 import { createPortal } from "react-dom"
@@ -186,40 +187,42 @@ export default function ProjectCard({
 
         <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">{description}</p>
 
-        <div className="flex flex-wrap gap-2 mb-6">
-          {tech.slice(0, 4).map((techItem) => (
-            <span key={techItem} className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-md">
-              {techItem}
-            </span>
-          ))}
-          {tech.length > 4 && (
-            <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-500 rounded-md">
-              +{tech.length - 4}
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-gray-500 hover:text-black transition-colors duration-200 group/link"
-            >
-              <Github className="w-4 h-4 mr-1 group-hover/link:scale-110 transition-transform duration-200" />
-              <span>Code</span>
-            </a>
-
-            <a
-              href={demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-gray-500 hover:text-black transition-colors duration-200 group/link"
-            >
-              <ExternalLink className="w-4 h-4 mr-1 group-hover/link:translate-x-1 transition-transform duration-200" />
-              <span>Demo</span>
-            </a>
+        <div className="flex items-center justify-between mb-6 gap-3">
+          <div className="min-w-0">
+            <TechIconsRow tech={tech} max={8} />
+          </div>
+          <div className="flex items-center space-x-3 ml-4 flex-shrink-0">
+            {!(github && github !== "#" && github.trim() !== "") && !(demo && demo !== "#" && demo.trim() !== "") ? (
+              <div className="inline-flex items-center text-sm text-gray-500">
+                <Lock className="w-4 h-4 mr-1" />
+                <span>Private</span>
+              </div>
+            ) : (
+              <>
+                {github && github !== "#" && github.trim() !== "" && (
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm text-gray-500 hover:text-black transition-colors duration-200 group/link"
+                  >
+                    <Github className="w-4 h-4 mr-1 group-hover/link:scale-110 transition-transform duration-200" />
+                    <span>Code</span>
+                  </a>
+                )}
+                {demo && demo !== "#" && demo.trim() !== "" && (
+                  <a
+                    href={demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm text-gray-500 hover:text-black transition-colors duration-200 group/link"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-1 group-hover/link:translate-x-1 transition-transform duration-200" />
+                    <span>Demo</span>
+                  </a>
+                )}
+              </>
+            )}
           </div>
         </div>
       </CardContent>

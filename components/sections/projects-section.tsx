@@ -3,42 +3,14 @@
 import { useState, useEffect, useRef } from "react"
 import ProjectCard from "@/components/project-card"
 
-// Updated dataset referencing actual images in public/projects/*
+// Projects dataset updated per user content and order
 const projects = [
+  // 1. Chewata
   {
     id: 1,
-    title: "Bingo",
+    title: "Chewata",
     description:
-      "Interactive Bingo game platform featuring real-time number draws, responsive UI, and optimized asset loading for casual play.",
-    images: ["/projects/bingo/00.jpg"],
-    tech: ["Next.js", "TypeScript", "Tailwind"],
-    github: "#",
-    demo: "#",
-    icon: "🎲",
-  },
-  {
-    id: 2,
-    title: "TeleStock",
-    description:
-      "Telecommunications inventory & asset tracking dashboard with visual insights and multi-step workflows for operations teams.",
-    images: [
-      "/projects/telestock/00.jpg",
-      "/projects/telestock/01.jpg",
-      "/projects/telestock/02.jpg",
-      "/projects/telestock/03.jpg",
-      "/projects/telestock/04.jpg",
-      "/projects/telestock/05.jpg",
-    ],
-    tech: ["Next.js", "TypeScript", "Tailwind", "Charts"],
-    github: "#",
-    demo: "#",
-    icon: "📈",
-  },
-  {
-    id: 3,
-    title: "Chewata Arcade",
-    description:
-      "Collection of casual arcade-style mini games with animated transitions, sprite assets, and performance tuned rendering.",
+      "A modern Flutter chat app with real-time messaging, presence, receipts, privacy controls, and random connections.",
     images: [
       "/projects/chewata/000.jpg",
       "/projects/chewata/001.jpg",
@@ -47,16 +19,41 @@ const projects = [
       "/projects/chewata/004.jpg",
       "/projects/chewata/005.jpg",
     ],
-    tech: ["React", "Canvas", "TypeScript"],
-    github: "#",
-    demo: "#",
-    icon: "👾",
+    tech: ["Flutter", "Firebase"],
+    github: "https://github.com/abeelgetahun/chewata-ChatApp",
+    demo: "https://github.com/abeelgetahun/chewata-ChatApp/releases/tag/chewata",
+    icon: "💬",
   },
+  // 2. OpenRooms
+  {
+    id: 2,
+    title: "OpenRooms",
+    description:
+      "A mobile app to explore hotels in Ethiopia with location filters, detailed info, and a clean browsing experience.",
+    images: ["/projects/openrooms/00.jpg"],
+    tech: ["Flutter", "Supabase"],
+    github: "",
+    demo: "",
+    icon: "🏨",
+  },
+  // 3. Bingo
+  {
+    id: 3,
+    title: "Bingo",
+    description:
+      "A mobile app that lets users enjoy multiple bingo game types with a fun, interactive, and easy-to-use experience.",
+    images: ["/projects/bingo/00.jpg"],
+    tech: ["Flutter"],
+    github: "",
+    demo: "",
+    icon: "🎲",
+  },
+  // 4. YeneShop
   {
     id: 4,
     title: "YeneShop",
     description:
-      "Modern e-commerce experience with product browsing, cart flow, and adaptive image handling for faster browsing.",
+      "A feature-rich Android app for managing and selling items with sales tracking, reports, and modular design",
     images: [
       "/projects/yeneshop/00.png",
       "/projects/yeneshop/01.png",
@@ -65,54 +62,65 @@ const projects = [
       "/projects/yeneshop/04.png",
       "/projects/yeneshop/05.png",
     ],
-    tech: ["Next.js", "TypeScript", "Tailwind", "Commerce"],
-    github: "#",
-    demo: "#",
-    icon: "�",
+    tech: ["Android", "Java", "XML", "SQLite"],
+    github: "https://github.com/abeelgetahun/Yene-shop",
+    demo: "https://github.com/abeelgetahun/Yene-shop/releases/tag/Yene_shop",
+    icon: "🛍️",
   },
+  // 5. TeleStock
   {
     id: 5,
-    title: "Bank Review Analyzer",
+    title: "TeleStock",
     description:
-      "Bank customer review analysis interface highlighting sentiment and categorization for operational insights.",
-    images: ["/projects/bank-review/00.png"],
-    tech: ["Next.js", "NLP", "TypeScript"],
-    github: "#",
-    demo: "#",
-    icon: "🏦",
+      "Web app for automated warehouse management with role-based access and powerful analytics.",
+    images: [
+      "/projects/telestock/00.jpg",
+      "/projects/telestock/01.jpg",
+      "/projects/telestock/02.jpg",
+      "/projects/telestock/03.jpg",
+      "/projects/telestock/04.jpg",
+      "/projects/telestock/05.jpg",
+    ],
+    tech: ["Next.js", "Neon", "Postgres"],
+    github: "https://github.com/abeelgetahun/Tele-WMS",
+    demo: "https://tele-stock.vercel.app/",
+    icon: "📦",
   },
+  // 6. Ethiopian Bank Review Analysis
   {
     id: 6,
-    title: "Insurance Risk Analysis",
+    title: "Ethiopian Bank Review Analysis",
     description:
-      "Dashboard for modeling insurance risk scenarios with layered visual analytics and KPIs.",
-    images: ["/projects/insurance-risk-analysis/00.png"],
-    tech: ["React", "Analytics", "TypeScript"],
-    github: "#",
-    demo: "#",
-    icon: "�️",
+      "Analyzes Ethiopian banking app reviews to deliver reliable sentiment and theme insights for product, risk, customer teams.",
+    images: ["/projects/bank-review/00.png"],
+    tech: ["Pandas", "Scikit-learn", "NLTK"],
+    github: "https://github.com/abeelgetahun/Ethiopian-banks-review-analysis",
+    demo: "",
+    icon: "🏦",
   },
+  // 7. Amharic E-commerce NER
   {
     id: 7,
-    title: "OpenRooms",
+    title: "Amharic E-commerce NER",
     description:
-      "Room listing and availability explorer with simplified booking flow and responsive image galleries.",
-    images: ["/projects/openrooms/00.jpg"],
-    tech: ["Next.js", "TypeScript", "Tailwind"],
-    github: "#",
-    demo: "#",
-    icon: "🏨",
+      "Centralized Amharic e-commerce platform using NER and LLMs to extract product, price, and vendor insights.",
+    images: ["/projects/e-commerce-ner/00.png"],
+    tech: ["Teletone", "PyTorch", "Pandas"],
+    github: "https://github.com/abeelgetahun/Amharic-E-commerce-NER",
+    demo: "",
+    icon: "🛒",
   },
+  // 8. Insurance Risk Analytics
   {
     id: 8,
-    title: "NER Visualizer",
+    title: "Insurance Risk Analytics",
     description:
-      "Named entity recognition visualization tool highlighting extracted entities with contextual coloring.",
-    images: ["/projects/e-commerce-ner/00.png"],
-    tech: ["NLP", "Visualization", "TypeScript"],
-    github: "#",
-    demo: "#",
-    icon: "�",
+      "Predictive modeling of insurance claims for premium optimization using ML and SHAP insights.",
+    images: ["/projects/insurance-risk-analysis/00.png"],
+    tech: ["Pandas", "DVC", "Scikit-learn"],
+    github: "https://github.com/abeelgetahun/End-to-End-Insurance-Risk-Analytics-Predictive-Modeling",
+    demo: "",
+    icon: "📊",
   },
 ]
 
