@@ -78,17 +78,17 @@ export default function AboutSection() {
                   <h3 className="text-sm font-medium text-black mb-1.5">Competitive Programming</h3>
                   <p className="text-xs text-gray-600 mb-2.5">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
                   <div className="flex items-center gap-2.5">
-                    <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
+                    <a href="https://leetcode.com/u/ab_el/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
                       <span
                         className="icon-bg-shimmer"
-                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("https://cdn.simpleicons.org/leetcode/FFA116")' }}
+                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/leetcode.svg")' }}
                         aria-hidden="true"
                       />
                     </a>
-                    <a href="https://codeforces.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
+                    <a href="https://codeforces.com/profile/abeeel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
                       <span
                         className="icon-bg-shimmer"
-                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("https://cdn.simpleicons.org/codeforces/1F8ACB")' }}
+                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/code-forces.svg")' }}
                         aria-hidden="true"
                       />
                     </a>

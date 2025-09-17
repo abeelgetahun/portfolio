@@ -453,6 +453,10 @@
 }
 
 @layer utilities {
+  /* Force all bold/semibold utilities to normal weight site-wide */
+  .font-semibold { font-weight: 400 !important; }
+  .font-bold { font-weight: 400 !important; }
+
   /* Hide native scrollbar but keep scrolling */
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */

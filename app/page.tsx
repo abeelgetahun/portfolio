@@ -58,7 +58,7 @@ export default function Home() {
 
       <div className="relative z-10">
   <div className="mx-auto max-w-7xl px-0 sm:px-3 md:px-5 lg:px-8 mt-0 mb-10">
-          <div className="page-lines mx-3 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 pt-12 px-3 sm:px-6 md:px-8">
+          <div className="page-lines mx-3 sm:mx-6 md:mx-10 lg:mx-16 xl:mx-24 pt-16 px-3 sm:px-6 md:px-8">
             <HeroSection />
             <div className="section-divider">
               <AboutSection />
