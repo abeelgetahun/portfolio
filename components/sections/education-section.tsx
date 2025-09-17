@@ -35,16 +35,33 @@ const certificates: Certificate[] = [
 function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: string; rotateMs?: number }) {
   const [idx, setIdx] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [inView, setInView] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
   const hasMany = images.length > 1
 
   useEffect(() => {
-    if (!hasMany || paused) return
+    const node = wrapperRef.current
+    if (!node) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setInView(entry.intersectionRatio >= 0.5)
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!hasMany || paused || !inView) return
     const t = setInterval(() => setIdx((i) => (i + 1) % images.length), rotateMs)
     return () => clearInterval(t)
-  }, [images.length, rotateMs, paused, hasMany])
+  }, [images.length, rotateMs, paused, hasMany, inView])
 
   return (
     <div
+      ref={wrapperRef}
       className="group relative w-full overflow-hidden rounded-xl border border-gray-200 bg-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}

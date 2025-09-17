@@ -38,19 +38,40 @@ export default function ProjectCard({
   const mergedImages = images && images.length > 0 ? images : image ? [image] : ["/placeholder.svg"]
   const [current, setCurrent] = React.useState(0)
   const [paused, setPaused] = React.useState(false)
+  const [inView, setInView] = React.useState(false)
   const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const [lightboxIndex, setLightboxIndex] = React.useState<number | null>(null)
   const pushedStateRef = useRef(false)
   const [mounted, setMounted] = React.useState(false)
   const touchStartX = useRef<number | null>(null)
+  const cardRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (mergedImages.length <= 1 || paused) return
+    if (mergedImages.length <= 1 || paused || !inView) return
     const id = setInterval(() => {
       setCurrent((c: number) => (c + 1) % mergedImages.length)
     }, rotateIntervalMs)
     return () => clearInterval(id)
-  }, [mergedImages.length, rotateIntervalMs, paused])
+  }, [mergedImages.length, rotateIntervalMs, paused, inView])
+
+  // Observe visibility of the card to throttle auto-rotation when off-screen
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        const visible = entry.isIntersecting && entry.intersectionRatio >= 0.5
+        setInView(visible)
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+    )
+    observer.observe(el)
+    return () => {
+      observer.unobserve(el)
+      observer.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
     setMounted(true)
@@ -117,6 +138,7 @@ export default function ProjectCard({
 
   return (
     <Card
+      ref={cardRef}
       className={`group transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-gray-200/60 bg-transparent hover:bg-gray-50/80 shadow-none overflow-hidden`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -138,13 +160,13 @@ export default function ProjectCard({
         ))}
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
         {mergedImages.length > 1 && (
-          <div className="absolute bottom-2 right-2 z-10">
-            <div className="flex gap-1 rounded-full bg-black/40 backdrop-blur-sm px-2 py-1 shadow-sm">
+          <div className="absolute bottom-1.5 right-1.5 z-10">
+            <div className="flex gap-0.5 rounded-full bg-black/30 px-1 py-0.5">
               {mergedImages.map((_, i) => (
                 <span
                   key={i}
                   onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
-                  className={`h-2 w-2 rounded-full bg-white/90 hover:bg-white cursor-pointer transition outline outline-1 outline-black/40 ${i === current ? 'ring-2 ring-white bg-white' : ''}`}
+                  className={`h-1 w-1 rounded-full bg-white/75 hover:bg-white cursor-pointer transition ${i === current ? 'ring-1 ring-white bg-white' : ''}`}
                 />
               ))}
             </div>
@@ -154,11 +176,7 @@ export default function ProjectCard({
         {/* Bottom gradient to improve overlay control contrast on bright images */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
 
-        <div className="absolute top-4 left-4">
-          <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm">
-            <span className="text-lg">{icon}</span>
-          </div>
-        </div>
+        {/* Removed top-left icon overlay as requested */}
       </div>
 
       <CardContent className="p-6">

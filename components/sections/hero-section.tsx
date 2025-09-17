@@ -75,7 +75,7 @@ export default function HeroSection() {
             {/* Description */}
             <div className="mb-7 max-w-lg">
               <p className="text-gray-700 leading-relaxed text-xs lg:text-sm">
-              I’m Abel Getahun, a 4th-year Software Engineering student who loves solving problems
+              I’m Abel Getahun, a Software Engineering student who loves solving problems
                and turning ideas into practical solutions. Over the years, I’ve gained 
                experience working with projects and collaborations, 
                which has helped me grow both technically and creatively.
