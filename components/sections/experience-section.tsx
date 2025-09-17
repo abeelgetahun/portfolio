@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { ExternalLink } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 const experiences = [
   {
@@ -16,20 +15,20 @@ const experiences = [
       "Implemented bug fixes and performance improvements during internship.",
     ],
     skills: ["Flutter", "Dart", "Firebase", "REST APIs"],
-    link: "#",
+    link: "https://jirtuu.com/",
   },
   {
     type: "experience",
     title: "FULLSTACK DEVELOPER",
     company: "Ethiotelecom",
     location: "Addis Ababa",
-  period: "JUN - AUG 2025",
+  period: "JUL - AUG 2025",
     description: [
       "Built and integrated full-stack features across web services and UI.",
       "Collaborated with team to deliver improvements within tight timelines.",
     ],
     skills: ["Next.js", "React", "Node.js", "PostgreSQL", "TypeScript"],
-    link: "#",
+    link: "",
   },
 ]
 
@@ -68,10 +67,19 @@ export default function ExperienceSection() {
                     <div className="mb-4">
                       <p className="text-xs md:text-sm font-mono tracking-wider uppercase text-gray-500 mb-2">{item.period}</p>
                       <div className="flex items-center gap-2 mb-2">
-                        <a href={item.link || '#'} target="_blank" rel="noreferrer" className="text-xl font-semibold text-black hover:underline">
-                          {item.company}
-                        </a>
-                        <ExternalLink className="w-4 h-4 text-gray-400" />
+                        <span className="text-xl font-semibold text-black">{item.company}</span>
+                        {item.link && item.link.trim() !== '' && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Open ${item.company} website`}
+                            title={`Open ${item.company}`}
+                            className="inline-flex items-center text-gray-500 hover:text-black"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        )}
                       </div>
                       <h3 className="text-base md:text-lg font-mono font-semibold uppercase tracking-wider text-black">{item.title}</h3>
                     </div>
@@ -85,10 +93,7 @@ export default function ExperienceSection() {
                       ))}
                     </div>
 
-                    {/* View More Button */}
-                    <Button variant="ghost" className="mt-2 inline-flex items-center gap-1 border border-gray-200 bg-white hover:bg-gray-50 text-gray-700">
-                      View More <ExternalLink className="w-3 h-3" />
-                    </Button>
+                    {/* Removed View More as requested */}
                   </div>
                 </div>
               </div>
