@@ -173,7 +173,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Email</h3>
-                  <p className="text-gray-300">abel.getahun@example.com</p>
+                  <p className="text-gray-300">abelgetahun66@gmail.com</p>
                 </div>
               </div>
 
@@ -203,7 +203,7 @@ export default function ContactSection() {
               <h3 className="font-semibold text-white mb-4">Connect with me</h3>
               <div className="flex space-x-4">
                 <a
-                  href="https://github.com/abelgetahun"
+                  href="https://github.com/abeelgetahun"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
@@ -211,7 +211,7 @@ export default function ContactSection() {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/abelgetahun"
+                  href="https://www.linkedin.com/in/abelgetahun"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
@@ -219,7 +219,7 @@ export default function ContactSection() {
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="mailto:abel.getahun@example.com"
+                  href="mailto:abelgetahun66@gmail.com"
                   className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
                 >
                   <Mail className="w-6 h-6" />
@@ -238,7 +238,7 @@ export default function ContactSection() {
                 className="border-white text-white hover:bg-white hover:text-black transition-all duration-300 bg-transparent"
                 asChild
               >
-                <a href="mailto:abel.getahun@example.com">{"Let's"} Talk</a>
+                <a href="mailto:abelgetahun66@gmail.com">{"Let's"} Talk</a>
               </Button>
             </div>
           </div>

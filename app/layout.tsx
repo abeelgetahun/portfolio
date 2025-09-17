@@ -6,15 +6,20 @@ import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Abel Getahun - Software Creator & Seeker",
+  title: "Ab_el",
   description: "Portfolio of Abel Getahun - Software Engineer, AI/ML Enthusiast, and Problem Solver",
   generator: "v0.app",
   keywords: ["Abel Getahun", "Software Engineer", "AI", "Machine Learning", "Portfolio", "Developer"],
   authors: [{ name: "Abel Getahun" }],
   openGraph: {
-    title: "Abel Getahun - Software Creator & Seeker",
+    title: "Ab_el",
     description: "Portfolio of Abel Getahun - Software Engineer, AI/ML Enthusiast, and Problem Solver",
     type: "website",
+  },
+  icons: {
+    icon: "/profile/profile-1.png",
+    shortcut: "/profile/profile-1.png",
+    apple: "/profile/profile-1.png",
   },
 }
 

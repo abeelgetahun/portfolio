@@ -10,25 +10,28 @@ type Certificate = {
 }
 
 const certificates: Certificate[] = [
+  // 1) Udacity
   {
-    title: "Innobiz Recognition",
-    issuer: "Innobiz",
+    title: "Android Developer",
+    issuer: "Udacity",
+    images: ["/certificate/udacity-android.jpg"],
+  },
+  // 2) Jirtuu
+  {
+    title: "Recognition",
+    issuer: "Jirtuu Software Labs",
+    images: ["/certificate/recognition-jirtuu.jpg"],
+  },
+  // 3) Innobiz
+  {
+    title: "Early stage startup traning",
+    issuer: "Innobiz-k",
     images: [
       "/certificate/innobiz/00.jpg",
       "/certificate/innobiz/01.jpg",
       "/certificate/innobiz/02.jpg",
       "/certificate/innobiz/1739710290096-min.jpg",
     ],
-  },
-  {
-    title: "Udacity Android",
-    issuer: "Udacity",
-    images: ["/certificate/udacity-android.jpg"],
-  },
-  {
-    title: "Jirtuu Recognition",
-    issuer: "Jirtuu Software Labs",
-    images: ["/certificate/recognition-jirtuu.jpg"],
   },
 ]
 
@@ -110,7 +113,6 @@ export default function EducationSection() {
             <div key={c.title} className="flex flex-col">
               <AutoSlider images={c.images} alt={c.title} />
               <div className="mt-3">
-                <div className="text-sm font-mono text-gray-500">Certificate</div>
                 <h3 className="text-lg font-semibold text-black">{c.title}</h3>
                 {c.issuer && <p className="text-sm text-gray-600">{c.issuer}</p>}
               </div>

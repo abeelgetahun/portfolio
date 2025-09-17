@@ -19,7 +19,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 py-8">
+    <footer className="bg-transparent border-t border-gray-200/40 py-8">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Navigation Links */}
@@ -53,13 +53,13 @@ export default function Footer() {
               <Popover.Content sideOffset={10} align="end" className="z-[10000] rounded-2xl border border-gray-200 bg-white shadow-xl p-2 w-56">
                 <div className="flex flex-col">
                   <a
-                    href="mailto:youremail@example.com"
+                    href="mailto:abelgetahun66@gmail.com"
                     className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
                   >
                     <Mail className="w-4 h-4" /> Gmail
                   </a>
                   <a
-                    href="https://t.me/yourusername"
+                    href="https://t.me/yeneenat_1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
@@ -67,7 +67,7 @@ export default function Footer() {
                     <Send className="w-4 h-4" /> Telegram
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/yourprofile"
+                    href="https://www.linkedin.com/in/abelgetahun"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
