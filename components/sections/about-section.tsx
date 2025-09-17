@@ -55,45 +55,57 @@ export default function AboutSection() {
               }}
             >
               <div className="flex gap-3 snap-x snap-mandatory py-1.5">
+                {/* Leading spacer to create left-edge breathing room */}
+                <div className="shrink-0 w-4 sm:w-6" aria-hidden="true" />
                 {/* Card 1 */}
-                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-sm font-medium text-black mb-1.5">Software Engineer</h3>
-                  <p className="text-xs text-gray-600">Building reliable, maintainable systems with a focus on clean architecture and developer experience.</p>
+                <div className="min-w-[240px] min-h-[150px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-sm font-medium text-black">Software Engineer</h3>
+                  <div className="flex flex-col items-start justify-center text-left px-1 pt-2 pb-1 h-[calc(100%-1.5rem)]">
+                    <p className="text-xs text-gray-600 text-left">Designing reliable and maintainable systems with clean architecture and a smooth developer experience.</p>
+                  </div>
                 </div>
 
                 {/* Card 2 */}
-                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-sm font-medium text-black mb-1.5">AI & ML Enthusiast</h3>
-                  <p className="text-xs text-gray-600">Exploring applied ML for real products — from data to deployment, responsibly.</p>
+                <div className="min-w-[240px] min-h-[150px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-sm font-medium text-black">AI & ML Enthusiast</h3>
+                  <div className="flex flex-col items-start justify-center text-left px-1 pt-2 pb-1 h-[calc(100%-1.5rem)]">
+                    <p className="text-xs text-gray-600 text-left">Exploring applied ML for real products — from data to deployment, responsibly.</p>
+                  </div>
                 </div>
 
                 {/* Card 3 */}
-                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-sm font-medium text-black mb-1.5">Mobile & Web Development</h3>
-                  <p className="text-xs text-gray-600">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
+                <div className="min-w-[240px] min-h-[150px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-sm font-medium text-black">Mobile & Web Development</h3>
+                  <div className="flex flex-col items-start justify-center text-left px-1 pt-2 pb-1 h-[calc(100%-1.5rem)]">
+                    <p className="text-xs text-gray-600 text-left">Crafting fast, accessible apps with modern stacks across web and mobile surfaces.</p>
+                  </div>
                 </div>
 
                 {/* Card 4 - Competitive Programming */}
-                <div className="min-w-[240px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
-                  <h3 className="text-sm font-medium text-black mb-1.5">Competitive Programming</h3>
-                  <p className="text-xs text-gray-600 mb-2.5">400+ problems solved across platforms. Sharpening algorithms, data structures, and speed.</p>
-                  <div className="flex items-center gap-2.5">
-                    <a href="https://leetcode.com/u/ab_el/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
-                      <span
-                        className="icon-bg-shimmer"
-                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/leetcode.svg")' }}
-                        aria-hidden="true"
-                      />
-                    </a>
-                    <a href="https://codeforces.com/profile/abeeel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
-                      <span
-                        className="icon-bg-shimmer"
-                        style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/code-forces.svg")' }}
-                        aria-hidden="true"
-                      />
-                    </a>
+                <div className="min-w-[240px] min-h-[150px] snap-start bg-white/80 backdrop-blur-sm border border-gray-100 rounded-2xl shadow-sm p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-white">
+                  <h3 className="text-sm font-medium text-black">Competitive Programming</h3>
+                  <div className="flex flex-col items-start justify-center text-left px-1 pt-2 pb-1 h-[calc(100%-1.5rem)]">
+                    <p className="text-xs text-gray-600 text-left mb-2.5">Solved 400+ problems, sharpening algorithms and logic.</p>
+                    <div className="flex items-start justify-start gap-2.5">
+                      <a href="https://leetcode.com/u/ab_el/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="LeetCode">
+                        <span
+                          className="icon-bg-shimmer"
+                          style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/leetcode.svg")' }}
+                          aria-hidden="true"
+                        />
+                      </a>
+                      <a href="https://codeforces.com/profile/abeeel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-50" aria-label="Codeforces">
+                        <span
+                          className="icon-bg-shimmer"
+                          style={{ width: '1rem', height: '1rem', ['--icon-url' as any]: 'url("/logo/code-forces.svg")' }}
+                          aria-hidden="true"
+                        />
+                      </a>
+                    </div>
                   </div>
                 </div>
+                {/* Trailing spacer to create right-edge breathing room */}
+                <div className="shrink-0 w-4 sm:w-6" aria-hidden="true" />
               </div>
 
               {/* Auto-hide scroll hint line */}
@@ -101,7 +113,7 @@ export default function AboutSection() {
             </div>
 
             {/* Fixed fog overlays and arrows anchored to wrapper */}
-            <div className="hidden sm:block pointer-events-none absolute left-0 top-0 h-full w-12 bg-gradient-to-r from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-8 sm:w-12 bg-gradient-to-r from-white to-transparent z-10" />
             <button
               type="button"
               onClick={() => {
@@ -110,11 +122,11 @@ export default function AboutSection() {
                 el.scrollBy({ left: -320, behavior: 'smooth' })
               }}
               aria-label="Scroll left"
-              className="hidden sm:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
+              className="flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
             >
               <span className="text-lg leading-none">‹</span>
             </button>
-            <div className="hidden sm:block pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-white to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-8 sm:w-12 bg-gradient-to-l from-white to-transparent z-10" />
             <button
               type="button"
               onClick={() => {
@@ -123,7 +135,7 @@ export default function AboutSection() {
                 el.scrollBy({ left: 320, behavior: 'smooth' })
               }}
               aria-label="Scroll right"
-              className="hidden sm:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
+              className="flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/80 border border-gray-200 shadow hover:bg-white"
             >
               <span className="text-lg leading-none">›</span>
             </button>
