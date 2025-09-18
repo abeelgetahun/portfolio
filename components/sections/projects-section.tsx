@@ -122,6 +122,24 @@ const projects = [
     demo: "",
     icon: "📊",
   },
+  // 9. Much more
+  {
+    id: 9,
+    title: "Much more",
+    description:
+      "You can find more about my projects on my GitHub repo.",
+    // Use GitHub profile preview as image; fallback to public placeholder if blocked
+    images: [
+      "https://github.com/abeelgetahun.png",
+    ],
+    tech: ["Python", "C++", "Jupyter", "Java"],
+    github: "https://github.com/abeelgetahun",
+    demo: "",
+    icon: "🔗",
+    cardHref: "https://github.com/abeelgetahun",
+    suppressLinks: true,
+    githubProfileUsername: "abeelgetahun",
+  },
 ]
 
 export default function ProjectsSection() {
@@ -151,6 +169,9 @@ export default function ProjectsSection() {
               demo={project.demo}
               icon={project.icon}
               index={index}
+              cardHref={(project as any).cardHref}
+              suppressLinks={(project as any).suppressLinks}
+              githubProfileUsername={(project as any).githubProfileUsername}
             />
           ))}
         </div>

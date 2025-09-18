@@ -29,7 +29,6 @@ const certificates: Certificate[] = [
     images: [
       "/certificate/innobiz/00.jpg",
       "/certificate/innobiz/01.jpg",
-      "/certificate/innobiz/02.jpg",
       "/certificate/innobiz/1739710290096-min.jpg",
     ],
   },
@@ -39,8 +38,9 @@ function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: s
   const [idx, setIdx] = useState(0)
   const [paused, setPaused] = useState(false)
   const [inView, setInView] = useState(false)
+  const [imgs, setImgs] = useState<string[]>(() => images.filter(Boolean))
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const hasMany = images.length > 1
+  const hasMany = imgs.length > 1
 
   useEffect(() => {
     const node = wrapperRef.current
@@ -56,11 +56,29 @@ function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: s
     return () => observer.disconnect()
   }, [])
 
+  // Keep internal list in sync if prop changes
+  useEffect(() => {
+    setImgs(images.filter(Boolean))
+    setIdx(0)
+  }, [images])
+
   useEffect(() => {
     if (!hasMany || paused || !inView) return
-    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), rotateMs)
+    const t = setInterval(() => setIdx((i) => (i + 1) % imgs.length), rotateMs)
     return () => clearInterval(t)
-  }, [images.length, rotateMs, paused, hasMany, inView])
+  }, [imgs.length, rotateMs, paused, hasMany, inView])
+
+  const handleImageError = (badIndex: number) => {
+    setImgs((prev) => {
+      const next = prev.filter((_, i) => i !== badIndex)
+      if (next.length === 0) {
+        setIdx(0)
+        return next
+      }
+      setIdx((i) => Math.min(i, next.length - 1))
+      return next
+    })
+  }
 
   return (
     <div
@@ -71,21 +89,33 @@ function AutoSlider({ images, alt, rotateMs = 3500 }: { images: string[]; alt: s
     >
       {/* 4:3 aspect ratio wrapper using padding-top */}
       <div className="relative w-full pt-[75%]">
-        {images.map((src, i) => (
+        {imgs.length > 0 ? (
+          imgs.map((src, i) => (
+            <Image
+              key={src + i}
+              src={src}
+              alt={alt}
+              fill
+              className={`absolute inset-0 object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={i === 0}
+              onError={() => handleImageError(i)}
+            />
+          ))
+        ) : (
           <Image
-            key={src + i}
-            src={src}
-            alt={alt}
+            src="/window.svg"
+            alt="Image unavailable"
             fill
-            className={`absolute inset-0 object-cover transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+            className="absolute inset-0 object-contain p-6 opacity-80"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={i === 0}
+            priority
           />
-        ))}
+        )}
       </div>
-      {hasMany && (
+      {hasMany && imgs.length > 0 && (
         <div className="absolute bottom-3 right-3 flex gap-1">
-          {images.map((_, i) => (
+          {imgs.map((_, i) => (
             <span key={i} className={`h-2 w-2 rounded-full ${i === idx ? "bg-black" : "bg-black/40"}`} />
           ))}
         </div>

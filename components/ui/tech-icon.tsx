@@ -41,6 +41,8 @@ const iconMap: IconMap = {
   "java": { source: "devicon", slug: "java/java-original" },
   "typescript": { source: "devicon", slug: "typescript/typescript-original" },
   "python": { source: "devicon", slug: "python/python-original" },
+  "c++": { source: "devicon", slug: "cplusplus/cplusplus-original" },
+  "cpp": { source: "devicon", slug: "cplusplus/cplusplus-original" },
 
   // Data / ML
   "pandas": { source: "devicon", slug: "pandas/pandas-original" },
@@ -50,6 +52,7 @@ const iconMap: IconMap = {
   "pytorch": { source: "devicon", slug: "pytorch/pytorch-original" },
   "pythorch": { source: "devicon", slug: "pytorch/pytorch-original" },
   "dvc": { source: "simpleicons", slug: "dvc" },
+  "jupyter": { source: "devicon", slug: "jupyter/jupyter-original" },
 }
 
 function normalize(name: string) {
