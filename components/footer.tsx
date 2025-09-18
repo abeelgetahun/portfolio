@@ -59,7 +59,7 @@ export default function Footer() {
                     <Mail className="w-4 h-4" /> Gmail
                   </a>
                   <a
-                    href="https://t.me/yeneenat_1"
+                    href="https://t.me/Yene_enat1"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"
@@ -67,7 +67,7 @@ export default function Footer() {
                     <Send className="w-4 h-4" /> Telegram
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/abelgetahun"
+                    href="https://www.linkedin.com/in/abeeel-getahun/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-gray-50 text-sm text-gray-800"

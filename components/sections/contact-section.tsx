@@ -211,12 +211,20 @@ export default function ContactSection() {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/abelgetahun"
+                  href="https://www.linkedin.com/in/abeeel-getahun/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
                 >
                   <Linkedin className="w-6 h-6" />
+                </a>
+                <a
+                  href="https://t.me/Yene_enat1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
+                >
+                  <Send className="w-6 h-6" />
                 </a>
                 <a
                   href="mailto:abelgetahun66@gmail.com"

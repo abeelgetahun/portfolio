@@ -27,7 +27,7 @@ const projects = [
   // 2. OpenRooms
   {
     id: 2,
-    title: "OpenRooms",
+    title: "HotelScout",
     description:
       "A mobile app to explore hotels in Ethiopia with location filters, detailed info, and a clean browsing experience.",
     images: ["/projects/openrooms/00.jpg"],
