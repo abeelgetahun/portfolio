@@ -37,8 +37,8 @@ export default function ProjectCard({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const useState = React.useState
   const mergedImages = images && images.length > 0 ? images : image ? [image] : ["/placeholder.svg"]
-  const [current, setCurrent] = React.useState(0)
-  const [paused, setPaused] = React.useState(false)
+  const [current, setCurrent] = React.useState(0) // logical index 0..n-1
+  const [paused, setPaused] = React.useState(false) // retained for compatibility, no longer used to stop auto-rotate
   const [inView, setInView] = React.useState(false)
   const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const [lightboxIndex, setLightboxIndex] = React.useState<number | null>(null)
@@ -46,14 +46,30 @@ export default function ProjectCard({
   const [mounted, setMounted] = React.useState(false)
   const touchStartX = useRef<number | null>(null)
   const cardRef = useRef<HTMLDivElement | null>(null)
+  const inlineTouchStartX = useRef<number | null>(null)
+  const inlineLastWheelTs = useRef<number>(0)
+  const n = mergedImages.length
+  // Inline sliding track state: includes clones at both ends => indices 0..n+1
+  const [inlineSlide, setInlineSlide] = React.useState(1)
+  const [inlineTransition, setInlineTransition] = React.useState(true)
+  // Lightbox sliding track state
+  const [lightboxSlide, setLightboxSlide] = React.useState(1)
+  const [lightboxTransition, setLightboxTransition] = React.useState(true)
 
+  // Keep inline sliding index in sync when images or current change (e.g., dot click)
   useEffect(() => {
-    if (mergedImages.length <= 1 || paused || !inView) return
+    setInlineSlide(Math.min(Math.max(1, current + 1), n > 0 ? n : 1))
+  }, [current, n])
+
+  // Auto-rotate inline when in view and not in lightbox
+  useEffect(() => {
+    if (n <= 1 || !inView || lightboxOpen) return
     const id = setInterval(() => {
-      setCurrent((c: number) => (c + 1) % mergedImages.length)
+      setInlineTransition(true)
+      setInlineSlide((s) => s + 1)
     }, rotateIntervalMs)
     return () => clearInterval(id)
-  }, [mergedImages.length, rotateIntervalMs, paused, inView])
+  }, [n, rotateIntervalMs, inView, lightboxOpen])
 
   // Observe visibility of the card to throttle auto-rotation when off-screen
   useEffect(() => {
@@ -114,12 +130,16 @@ export default function ProjectCard({
 
   const openLightboxAt = (index: number) => {
     setLightboxIndex(index)
+    setLightboxSlide(index + 1)
+    setLightboxTransition(true)
     setLightboxOpen(true)
   }
 
   const closeLightbox = () => {
     setLightboxOpen(false)
     setLightboxIndex(null)
+    setLightboxSlide(1)
+    setLightboxTransition(true)
     if (pushedStateRef.current) {
       // Go back one step to clear pushed state
       window.history.back()
@@ -129,12 +149,14 @@ export default function ProjectCard({
 
   const nextImage = () => {
     if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
-    setLightboxIndex((i) => i === null ? 0 : (i + 1) % mergedImages.length)
+    setLightboxTransition(true)
+    setLightboxSlide((s) => s + 1)
   }
 
   const prevImage = () => {
     if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
-    setLightboxIndex((i) => i === null ? 0 : (i - 1 + mergedImages.length) % mergedImages.length)
+    setLightboxTransition(true)
+    setLightboxSlide((s) => s - 1)
   }
 
   return (
@@ -147,26 +169,76 @@ export default function ProjectCard({
       <div
         className="relative h-48 overflow-hidden cursor-pointer"
         onClick={() => openLightboxAt(current)}
+        onTouchStart={(e) => { inlineTouchStartX.current = e.changedTouches[0].clientX }}
+        onTouchEnd={(e) => {
+          if (inlineTouchStartX.current === null) return
+          const dx = e.changedTouches[0].clientX - inlineTouchStartX.current
+          inlineTouchStartX.current = null
+          if (Math.abs(dx) < 40) return
+          if (dx < 0) { setInlineTransition(true); setInlineSlide((s) => s + 1) }
+          else { setInlineTransition(true); setInlineSlide((s) => s - 1) }
+        }}
+        onWheel={(e) => {
+          if (!mergedImages || mergedImages.length <= 1) return
+          const now = Date.now()
+          if (now - inlineLastWheelTs.current < 250) return
+          const any = e as unknown as WheelEvent
+          const dx = any.deltaX || 0
+          if (Math.abs(dx) < 10) return
+          inlineLastWheelTs.current = now
+          if (dx > 0) { setInlineTransition(true); setInlineSlide((s) => s + 1) }
+          else { setInlineTransition(true); setInlineSlide((s) => s - 1) }
+        }}
       >
-        {mergedImages.map((img, i) => (
-          <Image
-            key={img + i}
-            src={img}
-            alt={title}
-            fill
-            className={`object-cover absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              i === current ? 'opacity-100' : 'opacity-0'
-            } ${i === current ? 'group-hover:scale-105' : ''}`}
-          />
-        ))}
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+        <div
+          className="h-full w-full flex"
+          style={{ transform: `translateX(-${inlineSlide * 100}%)`, transition: inlineTransition ? 'transform 500ms ease-out' : 'none' }}
+          onTransitionEnd={() => {
+            if (n <= 1) return
+            // Sync logical current and wrap using clones
+            if (inlineSlide === 0) {
+              setInlineTransition(false)
+              setInlineSlide(n)
+              setCurrent(n - 1)
+              // Re-enable transition on next tick
+              setTimeout(() => setInlineTransition(true), 0)
+            } else if (inlineSlide === n + 1) {
+              setInlineTransition(false)
+              setInlineSlide(1)
+              setCurrent(0)
+              setTimeout(() => setInlineTransition(true), 0)
+            } else {
+              setCurrent(inlineSlide - 1)
+            }
+          }}
+        >
+          {/* Clone last at start */}
+          {n > 0 && (
+            <div className="relative min-w-full h-full">
+              <Image src={mergedImages[n - 1]} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+            </div>
+          )}
+          {/* Real slides */}
+          {mergedImages.map((img, i) => (
+            <div key={img + i} className="relative min-w-full h-full">
+              <Image src={img} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+            </div>
+          ))}
+          {/* Clone first at end */}
+          {n > 0 && (
+            <div className="relative min-w-full h-full">
+              <Image src={mergedImages[0]} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+            </div>
+          )}
+        </div>
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
         {mergedImages.length > 1 && (
           <div className="absolute bottom-1.5 right-1.5 z-10">
             <div className="flex gap-0.5 rounded-full bg-black/30 px-1 py-0.5">
               {mergedImages.map((_, i) => (
                 <span
                   key={i}
-                  onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+                  onClick={(e) => { e.stopPropagation(); setCurrent(i); setInlineTransition(true); setInlineSlide(i + 1); }}
                   className={`h-1 w-1 rounded-full bg-white/75 hover:bg-white cursor-pointer transition ${i === current ? 'ring-1 ring-white bg-white' : ''}`}
                 />
               ))}
@@ -260,8 +332,16 @@ export default function ProjectCard({
             </>
           )}
           <div
-            className="relative z-0 max-w-[92vw] max-h-[88vh]"
+            className="relative z-0 max-w-[92vw] max-h-[88vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => {
+              if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
+              const any = e as unknown as WheelEvent
+              const dx = any.deltaX || 0
+              if (Math.abs(dx) < 10) return
+              if (dx > 0) nextImage()
+              else prevImage()
+            }}
             onTouchStart={(e) => { touchStartX.current = e.changedTouches[0].clientX }}
             onTouchEnd={(e) => {
               if (touchStartX.current === null) return
@@ -272,13 +352,46 @@ export default function ProjectCard({
               else prevImage()
             }}
           >
-            {lightboxIndex !== null && (
-              <img
-                src={mergedImages[lightboxIndex]}
-                alt={title}
-                className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl"
-              />
-            )}
+            <div
+              className="flex items-center"
+              style={{ transform: `translateX(-${lightboxSlide * 100}%)`, transition: lightboxTransition ? 'transform 450ms ease-out' : 'none' }}
+              onTransitionEnd={() => {
+                if (n <= 1) return
+                if (lightboxIndex === null) return
+                if (lightboxSlide === 0) {
+                  setLightboxTransition(false)
+                  setLightboxSlide(n)
+                  setLightboxIndex(n - 1)
+                  setTimeout(() => setLightboxTransition(true), 0)
+                } else if (lightboxSlide === n + 1) {
+                  setLightboxTransition(false)
+                  setLightboxSlide(1)
+                  setLightboxIndex(0)
+                  setTimeout(() => setLightboxTransition(true), 0)
+                } else {
+                  setLightboxIndex(lightboxSlide - 1)
+                }
+              }}
+            >
+              {/* Clone last */}
+              {n > 0 && (
+                <div className="min-w-full flex items-center justify-center">
+                  <img src={mergedImages[n - 1]} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                </div>
+              )}
+              {/* Real slides */}
+              {mergedImages.map((img, i) => (
+                <div key={img + i} className="min-w-full flex items-center justify-center">
+                  <img src={img} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                </div>
+              ))}
+              {/* Clone first */}
+              {n > 0 && (
+                <div className="min-w-full flex items-center justify-center">
+                  <img src={mergedImages[0]} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                </div>
+              )}
+            </div>
           </div>
         </div>,
         document.body
