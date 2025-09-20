@@ -453,6 +453,42 @@
 }
 
 @layer utilities {
+  /* Cross-browser glass surface with fallback */
+  .glass-surface {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 9999px; /* typical for nav pill */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+    background-clip: padding-box;
+  }
+
+  /* Rounded panel variant for menus/sheets */
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(150%);
+    background-clip: padding-box;
+  }
+
+  /* Fallback when backdrop-filter is unsupported (e.g., some Samsung Internet versions) */
+  @supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .glass-surface {
+      background-color: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .glass-panel {
+      background-color: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+    }
+  }
+
   /* Force all bold/semibold utilities to normal weight site-wide */
   .font-semibold { font-weight: 400 !important; }
   .font-bold { font-weight: 400 !important; }

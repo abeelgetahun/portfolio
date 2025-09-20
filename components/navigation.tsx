@@ -185,7 +185,7 @@ export default function Navigation() {
   return (
     <>
       <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="bg-white/10 backdrop-blur-xl rounded-full border border-white/20 shadow-xl px-4 py-2 backdrop-saturate-150">
+        <div className="glass-surface px-4 py-2">
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-1">
@@ -223,7 +223,7 @@ export default function Navigation() {
         </div>
 
         {isOpen && (
-          <div className="md:hidden mt-2 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 shadow-2xl p-3 backdrop-saturate-150">
+          <div className="md:hidden mt-2 glass-panel p-3">
             <div className="space-y-2">
               {navItems.map((item) => (
                 <button
