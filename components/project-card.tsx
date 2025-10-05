@@ -165,18 +165,19 @@ export default function ProjectCard({
         window.open(cardHref, "_blank", "noopener,noreferrer")
       }}
     >
-      {/* Image / Header area */}
-      <div
-        className="relative h-48 overflow-hidden cursor-pointer"
-        onClick={(e) => {
-          if (cardHref) {
-            e.stopPropagation()
-            window.open(cardHref, "_blank", "noopener,noreferrer")
-            return
-          }
-          openLightboxAt(current)
-        }}
-      >
+  <div className="p-3 sm:p-4 md:p-6">
+        {/* Image / Header area */}
+        <div
+          className="relative h-48 overflow-hidden cursor-pointer rounded-t-xl"
+          onClick={(e) => {
+            if (cardHref) {
+              e.stopPropagation()
+              window.open(cardHref, "_blank", "noopener,noreferrer")
+              return
+            }
+            openLightboxAt(current)
+          }}
+        >
         {isGithubProfile ? (
           <>
             <div className="absolute inset-0 bg-black/15" />
@@ -260,9 +261,9 @@ export default function ProjectCard({
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
           </>
         )}
-      </div>
+        </div>
 
-      <CardContent className="p-6">
+        <CardContent className="p-0 mt-4 md:mt-6">
         <h3 className="font-heading text-xl font-bold text-black mb-3 group-hover:text-gray-700 transition-colors">{title}</h3>
         <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">{description}</p>
         <div className="flex items-center justify-between mb-6 gap-3">
@@ -323,6 +324,7 @@ export default function ProjectCard({
           )}
         </div>
       </CardContent>
+      </div>
 
       {mounted && lightboxOpen && createPortal(
         <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-md flex items-center justify-center p-4" onClick={closeLightbox} aria-modal="true" role="dialog">
