@@ -165,7 +165,7 @@ export default function ProjectCard({
         window.open(cardHref, "_blank", "noopener,noreferrer")
       }}
     >
-  <div className="p-3 sm:p-4 md:p-6">
+  <div className="px-0 py-3 sm:p-4 md:p-6">
         {/* Image / Header area */}
         <div
           className="relative h-48 overflow-hidden cursor-pointer rounded-t-xl"

@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import { ExternalLink } from "lucide-react"
 
 type Certificate = {
   title: string
   issuer?: string
   images: string[]
+  verifyUrl?: string
 }
 
 const certificates: Certificate[] = [
@@ -15,13 +17,20 @@ const certificates: Certificate[] = [
     title: "Android Developer",
     issuer: "Udacity",
     images: ["/certificate/udacity-android.jpg"],
+    verifyUrl: "https://www.udacity.com/certificate/e/7a5ff9d4-c924-11ef-aee7-bb82e2d16235",
   },
-  // 2) Jirtuu
+  // 2) 10 academy
   {
-    title: "Recognition",
-    issuer: "Jirtuu Software Labs",
-    images: ["/certificate/recognition-jirtuu.jpg"],
+    title: "ML Engineering",
+    issuer: "10 Academy",
+    images: ["/certificate/10_academy/certificate.jpg"],
   },
+  // // 3) Jirtuu
+  // {
+  //   title: "Recognition",
+  //   issuer: "Jirtuu Software Labs",
+  //   images: ["/certificate/recognition-jirtuu.jpg"],
+  // },
   // 3) Innobiz
   {
     title: "Early stage startup traning",
@@ -143,7 +152,21 @@ export default function EducationSection() {
             <div key={c.title} className="flex flex-col">
               <AutoSlider images={c.images} alt={c.title} />
               <div className="mt-3">
-                <h3 className="text-lg font-semibold text-black">{c.title}</h3>
+                <div className="flex items-center justify-between gap-2 min-w-0">
+                  <h3 className="text-lg font-semibold text-black truncate">{c.title}</h3>
+                  {c.verifyUrl && (
+                    <a
+                      href={c.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Verify certificate"
+                      aria-label={`Verify ${c.title}`}
+                      className="inline-flex items-center text-gray-500 hover:text-black transition-colors flex-shrink-0"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  )}
+                </div>
                 {c.issuer && <p className="text-sm text-gray-600">{c.issuer}</p>}
               </div>
             </div>
