@@ -356,6 +356,95 @@
     .icon-shine::after, .icon-glow { animation: none !important; }
   }
 
+  /* Subtle text shine utility for inline links */
+  @keyframes link-shine-sweep {
+    0% {
+      transform: translateX(-140%) skewX(-20deg);
+      opacity: 0.0;
+    }
+    18% { opacity: 0.25; }
+    50% { opacity: 0.12; }
+    100% {
+      transform: translateX(140%) skewX(-20deg);
+      opacity: 0.0;
+    }
+  }
+  .shine-link {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .shine-link::after {
+    content: "";
+    position: absolute;
+    top: -30%;
+    bottom: -30%;
+    left: -40%;
+    width: 36%;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 35%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0) 65%);
+    transform: translateX(0) skewX(-20deg);
+    animation: link-shine-sweep 3s linear infinite;
+    z-index: 1;
+    mix-blend-mode: screen;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shine-link::after { animation: none !important; }
+  }
+
+  /* High-contrast text shimmer that keeps text mostly black */
+  @keyframes shine-text-move {
+    0% { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+  .shine-text {
+    background-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 40%,
+      #ffffff 50%, /* bright highlight */
+      #000 60%,
+      #000 100%
+    );
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* lets gradient fill the glyphs */
+    -webkit-text-fill-color: transparent; /* ensure WebKit shows gradient */
+    will-change: background-position;
+    animation: shine-text-move 4.8s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shine-text { animation: none !important; }
+  }
+
+  /* Amber (active-nav) colored text shimmer for links */
+  @keyframes amber-shine-move {
+    0% { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+  .amber-shine-text {
+    /* Amber-500 with a consistent amber highlight band; matches active nav */
+    background-image: linear-gradient(
+      90deg,
+       #f59e0b 0%,
+      #f59e0b 40%,
+      #ffffff 50%,
+      #f59e0b 60%,
+      #f59e0b 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    will-change: background-position;
+    animation: amber-shine-move 4.8s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .amber-shine-text { animation: none !important; }
+  }
+
   @keyframes marquee {
     0% {
       transform: translateX(0%);

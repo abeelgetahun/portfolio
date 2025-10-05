@@ -16,11 +16,13 @@ const experiences = [
     ],
     skills: ["Flutter", "Dart", "Firebase", "REST APIs"],
     link: "https://jirtuu.com/",
+    certificateLinkText: "recognition",
+    certificateLinkUrl: "https://verify.jirtuu.com/verify/JSL-CERT-2025-3492",
   },
   {
     type: "experience",
-    title: "FULLSTACK DEVELOPER",
-    company: "Ethiotelecom",
+    title: "FULLSTACK DEVELOPER INTERN",
+    company: "Ethio Telecom",
     location: "Addis Ababa",
   period: "JUL - AUG 2025",
     description: [
@@ -81,7 +83,20 @@ export default function ExperienceSection() {
                           </a>
                         )}
                       </div>
-                      <h3 className="text-base md:text-lg font-mono font-semibold uppercase tracking-wider text-black">{item.title}</h3>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <h3 className="text-base md:text-lg font-mono font-semibold uppercase tracking-wider text-black">{item.title}</h3>
+                        {item.certificateLinkUrl && (
+                          <a
+                            href={item.certificateLinkUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="amber-shine-text inline-block text-[11px] md:text-xs no-underline"
+                            title="View certificate"
+                          >
+                            {item.certificateLinkText || "reconition"}
+                          </a>
+                        )}
+                      </div>
                     </div>
 
                     {/* Description */}
