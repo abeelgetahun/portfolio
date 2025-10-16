@@ -14,11 +14,15 @@ export const metadata: Metadata = {
     template: "%s | Abel Getahun",
   },
   description:
-    "Explore the portfolio of Abel Getahun, a software engineer, Mobile developer and AI enthusiast building intuitive web, mobile, and machine learning solutions.",
+    "I’m Abel Getahun, a software engineering student who loves solving problems and turning ideas into practical solutions through collaborative projects.",
   keywords: [
     "Abel Getahun",
     "Abel",
-    "Abel Getahun portfolio",
+    "Ab_el",
+    "ab_el",
+    "Abeeel",
+    "abeeel",
+    "Abel Getahun Portfolio",
     "software engineer",
     "mobile developer",
     "flutter developer",
@@ -39,27 +43,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ab_el",
     description:
-      "Explore the portfolio of Abel Getahun, a software engineer and AI enthusiast building intuitive web, mobile, and machine learning solutions.",
+      "I’m Abel Getahun, a software engineering student who loves solving problems and turning ideas into practical solutions through collaborative projects.",
     url: "https://www.abelgetahun.dev",
-    siteName: "Abel Getahun Portfolio",
+    siteName: "Ab_el",
     type: "website",
     locale: "en_US",
-    images: [
-      {
-        url: "https://www.abelgetahun.dev/profile/profile-3.png",
-        width: 1200,
-        height: 630,
-        alt: "Abeeel",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Abel Getahun | Software Engineer | Mobile app developer",
+    card: "summary",
+    title: "Abel Getahun | Software Developer",
     description:
-      "Discover projects, experience, and articles from software engineer Abel Getahun focusing on AI, web, and mobile solutions.",
+      "I’m Abel Getahun, a software engineering student who loves solving problems and turning ideas into practical solutions through collaborative projects.",
     creator: "@abelgetahun_",
-    images: ["https://www.abelgetahun.dev/profile/profile-3.png"],
   },
   robots: {
     index: true,
@@ -73,9 +68,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/profile/profile-3.png", type: "image/png" }],
-    shortcut: "/profile/profile-3.png",
-    apple: "/profile/profile-3.png",
+    icon: [
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: ["/icon.png"],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
 }
 
@@ -83,11 +81,11 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Abel Getahun",
+  alternateName: ["Ab_el", "ab_el", "Abeeel", "abeeel"],
   url: "https://www.abelgetahun.dev",
-  image: "https://www.abelgetahun.dev/profile/profile-1.png",
   jobTitle: "Software Engineer",
   description:
-    "Software engineer, building human-centered web, mobile, and data solutions from Ethiopia.",
+    "I’m Abel Getahun, a software engineering student who loves solving problems and turning ideas into practical solutions through collaborative projects.",
   email: "mailto:abelgetahun66@gmail.com",
   sameAs: [
     "https://github.com/abeelgetahun",
@@ -117,10 +115,11 @@ const personJsonLd = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Abel Getahun Portfolio",
+  name: "Ab_el",
+  alternateName: ["Ab_el", "ab_el", "Abeeel", "abeeel"],
   url: "https://www.abelgetahun.dev",
   description:
-    "Portfolio website showcasing the projects, experience, and achievements of software engineer Abel Getahun.",
+    "Portfolio website of Abel Getahun, a software engineering student solving problems and building practical solutions through collaborative projects.",
   publisher: {
     "@type": "Person",
     name: "Abel Getahun",
