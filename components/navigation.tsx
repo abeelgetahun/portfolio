@@ -184,7 +184,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+  <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50" aria-label="Primary">
         <div className="glass-surface px-4 py-2">
           {/* Desktop Menu */}
           <div className="hidden md:block">
