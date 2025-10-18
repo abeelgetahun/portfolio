@@ -6,6 +6,7 @@ import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import FullPageLoading from "@/components/loading/full-page-loading"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.abelgetahun.dev"),
@@ -142,7 +143,7 @@ export default function RootLayout({
             __html: JSON.stringify([websiteJsonLd, personJsonLd]),
           }}
         />
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+  <Suspense fallback={<FullPageLoading />}>{children}</Suspense>
         <Analytics />
         <SpeedInsights />
       </body>

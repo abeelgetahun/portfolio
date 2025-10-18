@@ -282,6 +282,19 @@
     animation: bounce-slow 3s ease-in-out infinite;
   }
 
+  @keyframes loading-letter {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: translateY(2px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
   /* Subtle icon shine + glow */
   @keyframes shine-sweep {
     0% {
@@ -352,8 +365,17 @@
     animation: icon-glow 3.2s ease-in-out infinite;
   }
 
+  .loading-letter {
+    display: inline-block;
+    animation: loading-letter 1.4s ease-in-out infinite;
+  }
+
+
   @media (prefers-reduced-motion: reduce) {
     .icon-shine::after, .icon-glow { animation: none !important; }
+    .loading-letter {
+      animation: none !important;
+    }
   }
 
   /* Subtle text shine utility for inline links */
