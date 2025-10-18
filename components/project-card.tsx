@@ -7,6 +7,7 @@ import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Lock, ArrowUpRight 
 import Image from "next/image"
 import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import { Spinner } from "@/components/ui/spinner"
 
 interface ProjectCardProps {
   title: string
@@ -59,6 +60,48 @@ export default function ProjectCard({
   const [inlineTransition, setInlineTransition] = React.useState(true)
   const [lightboxSlide, setLightboxSlide] = React.useState(1)
   const [lightboxTransition, setLightboxTransition] = React.useState(true)
+  const [inlineLoaded, setInlineLoaded] = React.useState<Record<string, boolean>>({})
+  const [lightboxLoaded, setLightboxLoaded] = React.useState<Record<string, boolean>>({})
+
+  const markInlineLoaded = React.useCallback((src?: string | null) => {
+    if (!src) return
+    setInlineLoaded((prev) => (prev[src] ? prev : { ...prev, [src]: true }))
+  }, [])
+
+  const markLightboxLoaded = React.useCallback((src?: string | null) => {
+    if (!src) return
+    setLightboxLoaded((prev) => (prev[src] ? prev : { ...prev, [src]: true }))
+  }, [])
+
+  const isInlineLoaded = React.useCallback(
+    (src?: string | null) => {
+      if (!src) return true
+      return Boolean(inlineLoaded[src])
+    },
+    [inlineLoaded]
+  )
+
+  const isLightboxLoaded = React.useCallback(
+    (src?: string | null) => {
+      if (!src) return true
+      return Boolean(lightboxLoaded[src])
+    },
+    [lightboxLoaded]
+  )
+
+  const activeLightboxSource = lightboxIndex !== null ? mergedImages[lightboxIndex] : null
+  const showLightboxSpinner = lightboxOpen && !isLightboxLoaded(activeLightboxSource)
+  const inlineActiveIndex = React.useMemo(() => {
+    if (n === 0) return 0
+    if (inlineSlide === 0) return Math.max(0, n - 1)
+    if (inlineSlide === n + 1) return 0
+    const idx = inlineSlide - 1
+    if (idx < 0) return 0
+    if (idx >= n) return n - 1
+    return idx
+  }, [inlineSlide, n])
+  const activeInlineSource = isGithubProfile ? null : mergedImages[inlineActiveIndex]
+  const showInlineShimmer = !isGithubProfile && !isInlineLoaded(activeInlineSource)
 
   // Observe visibility for auto-rotate
   useEffect(() => {
@@ -145,11 +188,17 @@ export default function ProjectCard({
 
   const nextImage = () => {
     if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
+    const base = lightboxIndex ?? 0
+    const target = (base + 1) % mergedImages.length
+    setLightboxIndex(target)
     setLightboxTransition(true)
     setLightboxSlide((s) => s + 1)
   }
   const prevImage = () => {
     if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
+    const base = lightboxIndex ?? 0
+    const target = (base - 1 + mergedImages.length) % mergedImages.length
+    setLightboxIndex(target)
     setLightboxTransition(true)
     setLightboxSlide((s) => s - 1)
   }
@@ -228,23 +277,56 @@ export default function ProjectCard({
               {/* Clone last */}
               {n > 0 && (
                 <div className="relative min-w-full h-full">
-                  <Image src={mergedImages[n - 1]} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                  <Image
+                    src={mergedImages[n - 1]}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className={`object-cover transition-opacity duration-300 ${isInlineLoaded(mergedImages[n - 1]) ? "opacity-100" : "opacity-0"}`}
+                    onLoadingComplete={() => markInlineLoaded(mergedImages[n - 1])}
+                    onError={() => markInlineLoaded(mergedImages[n - 1])}
+                  />
                 </div>
               )}
               {/* Real slides */}
               {mergedImages.map((img, i) => (
                 <div key={img + i} className="relative min-w-full h-full">
-                  <Image src={img} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                  <Image
+                    src={img}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className={`object-cover transition-opacity duration-300 ${isInlineLoaded(img) ? "opacity-100" : "opacity-0"}`}
+                    onLoadingComplete={() => markInlineLoaded(img)}
+                    onError={() => markInlineLoaded(img)}
+                    priority={i === 0}
+                  />
                 </div>
               ))}
               {/* Clone first */}
               {n > 0 && (
                 <div className="relative min-w-full h-full">
-                  <Image src={mergedImages[0]} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                  <Image
+                    src={mergedImages[0]}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className={`object-cover transition-opacity duration-300 ${isInlineLoaded(mergedImages[0]) ? "opacity-100" : "opacity-0"}`}
+                    onLoadingComplete={() => markInlineLoaded(mergedImages[0])}
+                    onError={() => markInlineLoaded(mergedImages[0])}
+                  />
                 </div>
               )}
             </div>
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none z-10" />
+            {!isGithubProfile && (
+              <div
+                className={`pointer-events-none absolute inset-0 z-20 flex items-center justify-center transition-opacity duration-200 ${showInlineShimmer ? "opacity-100" : "opacity-0"}`}
+                aria-hidden="true"
+              >
+                <div className="absolute inset-0 rounded-t-xl shimmer-surface" />
+              </div>
+            )}
             {mergedImages.length > 1 && (
               <div className="absolute bottom-1.5 right-1.5 z-10">
                 <div className="flex gap-0.5 rounded-full bg-black/30 px-1 py-0.5">
@@ -328,20 +410,32 @@ export default function ProjectCard({
 
       {mounted && lightboxOpen && createPortal(
         <div className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-md flex items-center justify-center p-4" onClick={closeLightbox} aria-modal="true" role="dialog">
-          <button aria-label="Close image" className="absolute top-4 right-4 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md" onClick={(e) => { e.stopPropagation(); closeLightbox() }}>
+          <button
+            aria-label="Close image"
+            className="absolute top-4 right-4 rounded-full bg-black/55 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md transition-colors hover:bg-black/65 hover:border-white/30 hover:ring-2 hover:ring-white/40 active:bg-gray-500"
+            onClick={(e) => { e.stopPropagation(); closeLightbox() }}
+          >
             <X className="w-6 h-6" />
           </button>
           {mergedImages.length > 1 && (
             <>
-              <button aria-label="Previous image" className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md" onClick={(e) => { e.stopPropagation(); prevImage() }}>
+              <button
+                aria-label="Previous image"
+                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md transition-colors hover:bg-black/65 hover:border-white/30 hover:ring-2 hover:ring-white/40 active:bg-gray-500"
+                onClick={(e) => { e.stopPropagation(); prevImage() }}
+              >
                 <ChevronLeft className="w-7 h-7" />
               </button>
-              <button aria-label="Next image" className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 hover:bg-black/65 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md" onClick={(e) => { e.stopPropagation(); nextImage() }}>
+              <button
+                aria-label="Next image"
+                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 rounded-full bg-black/55 text-white p-2 backdrop-blur-md border border-white/20 z-10 shadow-md transition-colors hover:bg-black/65 hover:border-white/30 hover:ring-2 hover:ring-white/40 active:bg-gray-500"
+                onClick={(e) => { e.stopPropagation(); nextImage() }}
+              >
                 <ChevronRight className="w-7 h-7" />
               </button>
             </>
           )}
-          <div className="relative z-0 max-w-[92vw] max-h-[88vh] overflow-hidden" onClick={(e) => e.stopPropagation()} onWheel={(e) => {
+          <div className="relative z-0 max-w-[92vw] max-h-[88vh] overflow-hidden" onWheel={(e) => {
             if (!mergedImages || mergedImages.length <= 1 || lightboxIndex === null) return
             const any = e as unknown as WheelEvent
             const dx = any.deltaX || 0
@@ -354,6 +448,11 @@ export default function ProjectCard({
             if (Math.abs(dx) < 40) return
             if (dx < 0) nextImage(); else prevImage()
           }}>
+            {showLightboxSpinner && (
+              <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center" aria-hidden="true">
+                <Spinner className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />
+              </div>
+            )}
             <div className="flex items-center" style={{ transform: `translateX(-${lightboxSlide * 100}%)`, transition: lightboxTransition ? "transform 450ms ease-out" : "none" }} onTransitionEnd={() => {
               if (n <= 1) return
               if (lightboxIndex === null) return
@@ -363,17 +462,41 @@ export default function ProjectCard({
             }}>
               {n > 0 && (
                 <div className="min-w-full flex items-center justify-center">
-                  <img src={mergedImages[n - 1]} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                  <img
+                    src={mergedImages[n - 1]}
+                    alt={title}
+                    className={`max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl transition-opacity duration-300 ${isLightboxLoaded(mergedImages[n - 1]) ? "opacity-100" : "opacity-0"}`}
+                    loading="lazy"
+                    onClick={(e) => e.stopPropagation()}
+                    onLoad={() => markLightboxLoaded(mergedImages[n - 1])}
+                    onError={() => markLightboxLoaded(mergedImages[n - 1])}
+                  />
                 </div>
               )}
               {mergedImages.map((img, i) => (
                 <div key={img + i} className="min-w-full flex items-center justify-center">
-                  <img src={img} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                  <img
+                    src={img}
+                    alt={title}
+                    className={`max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl transition-opacity duration-300 ${isLightboxLoaded(img) ? "opacity-100" : "opacity-0"}`}
+                    loading="lazy"
+                    onClick={(e) => e.stopPropagation()}
+                    onLoad={() => markLightboxLoaded(img)}
+                    onError={() => markLightboxLoaded(img)}
+                  />
                 </div>
               ))}
               {n > 0 && (
                 <div className="min-w-full flex items-center justify-center">
-                  <img src={mergedImages[0]} alt={title} className="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" />
+                  <img
+                    src={mergedImages[0]}
+                    alt={title}
+                    className={`max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl transition-opacity duration-300 ${isLightboxLoaded(mergedImages[0]) ? "opacity-100" : "opacity-0"}`}
+                    loading="lazy"
+                    onClick={(e) => e.stopPropagation()}
+                    onLoad={() => markLightboxLoaded(mergedImages[0])}
+                    onError={() => markLightboxLoaded(mergedImages[0])}
+                  />
                 </div>
               )}
             </div>
