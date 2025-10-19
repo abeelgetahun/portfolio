@@ -31,7 +31,8 @@ const projects = [
     description:
       "A mobile app to explore hotels in Ethiopia with location filters, detailed info, and a clean browsing experience.",
     images: ["/projects/openrooms/00.jpg"],
-    tech: ["Flutter", "Supabase"],
+    // tech: ["Flutter", "Supabase"],
+    tech: ["Flutter"],
     github: "",
     demo: "",
     icon: "🏨",
