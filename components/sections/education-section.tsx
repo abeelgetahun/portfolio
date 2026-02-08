@@ -37,8 +37,8 @@ const certificates: Certificate[] = [
     issuer: "Innobiz-k",
     images: [
       "/certificate/innobiz/00.jpg",
-      "/certificate/innobiz/01.jpg",
-      "/certificate/innobiz/1739710290096-min.jpg",
+      // "/certificate/innobiz/01.jpg",
+      // "/certificate/innobiz/1739710290096-min.jpg",
     ],
   },
 ]
